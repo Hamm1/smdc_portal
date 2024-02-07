@@ -1,7 +1,7 @@
 
 import { $, component$, useVisibleTask$, useSignal, useStore} from '@builder.io/qwik';
-import { invoke } from '@tauri-apps/api/tauri';
-import { WebviewWindow } from "@tauri-apps/api/window";
+import { invoke } from '@tauri-apps/api/core';
+import { WebviewWindow } from "@tauri-apps/api/webview";
 import { v4 as uuidv4 } from 'uuid';
 
 interface Location {
@@ -35,7 +35,7 @@ export default component$(() => {
             <ul role="list" class="grid grid-cols-2 2xl:grid-cols-4 3xl:grid-cols-6 gap-3">
             {state.locations.filter((record) => record.title.toLowerCase().includes(search.value.toLowerCase())).map((record) => {
                 return (
-                    <div class="card w-96 bg-primary text-primary-content" key={record.title}>
+                    <div class="card w-96 bg-primary text-primary-content" key={uuidv4()}>
                         <div class="card-body">
                             <h2 class="card-title">{record.title}</h2>
                             <p class="break-words text-wrap">{record.url}</p>

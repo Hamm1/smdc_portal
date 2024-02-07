@@ -1,7 +1,7 @@
 import { component$ } from "@builder.io/qwik";
 // import { SMDCLogo } from "../icons/smdc";
 import styles from "./header.module.css";
-import { WebviewWindow } from "@tauri-apps/api/window";
+import { WebviewWindow } from "@tauri-apps/api/webview";
 
 export default component$(() => {
   return (

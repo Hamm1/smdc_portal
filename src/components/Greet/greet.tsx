@@ -1,5 +1,5 @@
 import { $, component$, useSignal } from '@builder.io/qwik'
-import { invoke } from '@tauri-apps/api/tauri'
+import { invoke } from '@tauri-apps/api/core'
 
 export default component$(() => {
   const greetMsg = useSignal('')
