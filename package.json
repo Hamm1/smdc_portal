@@ -1,0 +1,55 @@
+{
+  "name": "smdc_portal",
+  "description": "SMDC Portal to connect SMDC apps into central location.",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "npm run tauri build",
+    "build:debug": "cargo tauri build --debug",
+    "qwik:build": "qwik build",
+    "build.client": "vite build",
+    "build.preview": "vite build --ssr src/entry.preview.tsx",
+    "build.server": "vite build -c adapters/static/vite.config.ts",
+    "build.types": "tsc --incremental --noEmit",
+    "deploy": "echo 'Run \"npm run qwik add\" to install a server adapter'",
+    "dev": "vite --mode ssr",
+    "dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force",
+    "fmt": "prettier --write .",
+    "fmt.check": "prettier --check .",
+    "lint": "eslint \"src/**/*.ts*\"",
+    "preview": "qwik build preview && vite preview --open",
+    "start": "vite --open --mode ssr",
+    "qwik": "qwik",
+    "tauri": "tauri"
+  },
+  "devDependencies": {
+    "@builder.io/qwik": "^1.4.4",
+    "@builder.io/qwik-city": "^1.4.4",
+    "@types/eslint": "8.56.2",
+    "@types/node": "^20.11.16",
+    "@types/uuid": "^9.0.8",
+    "@typescript-eslint/eslint-plugin": "6.21.0",
+    "@typescript-eslint/parser": "6.21.0",
+    "autoprefixer": "^10.4.17",
+    "daisyui": "^4.6.1",
+    "eslint": "8.56.0",
+    "eslint-plugin-qwik": "^1.4.4",
+    "postcss": "^8.4.34",
+    "prettier": "3.2.5",
+    "sweetalert2": "11.10.5",
+    "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "5.3.3",
+    "undici": "6.6.2",
+    "uuid": "^9.0.1",
+    "vite": "5.0.12",
+    "vite-tsconfig-paths": "4.3.1"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^1.5.3",
+    "@tauri-apps/cli": "^1.5.9"
+  }
+}

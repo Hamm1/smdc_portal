@@ -1,0 +1,40 @@
+{"locations":
+	[
+		{
+			"title":"Ansible",
+			"url":"https://smdcansible/"
+		},
+		{
+			"title":"Solarwinds Helpdesk",
+			"url":"https://helpdesk.smdc.army.mil/helpdesk/WebObjects/Helpdesk.woa"
+		},
+		{
+			"title":"PowerBI ACAS Dashboard",
+			"url":"https://smdhw6huaapb001.smdch.smdc.army.mil/reports/powerbi/SMDC/SMDC_ACAS_Dashboard"
+		},
+		{
+			"title":"PowerBI User Dashboard",
+			"url":"https://smdhw6huaapb001.smdch.smdc.army.mil/reports/powerbi/SMDC/USER_Tracking%20(AD)"
+		},
+		{
+			"title":"PowerBI Computer Dashboard",
+			"url":"https://smdhw6huaapb001.smdch.smdc.army.mil/reports/powerbi/SMDC/Computer_Tracking%20(AD)"
+		},
+		{
+			"title":"Helpdesk Tool Grafana",
+			"url":"https://helpdesktool.smdch.smdc.army.mil/grafana/"
+		},
+		{
+			"title":"Helpdesk Tool Pocketbase",
+			"url":"https://helpdesktool.smdch.smdc.army.mil/admin/_/"
+		},
+		{
+			"title":"Helpdesk Tool Jaeger",
+			"url":"https://helpdesktool.smdch.smdc.army.mil/jaeger/"
+		},
+		{
+			"title":"Help Desk Web Tool",
+			"url":"https://smdchdwi/ticket"
+		}
+	]
+}

@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "name": "smdc_portal",
+  "short_name": "smdc_portal",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "Application linking SMDC resources together."
+}

@@ -1,0 +1,61 @@
+
+import { $, component$, useVisibleTask$, useSignal, useStore} from '@builder.io/qwik';
+import { invoke } from '@tauri-apps/api/tauri';
+import { WebviewWindow } from "@tauri-apps/api/window";
+import { v4 as uuidv4 } from 'uuid';
+
+interface Location {
+    title: string;
+    url: string;
+}
+
+interface Locations {
+    locations: Array<Location>
+}
+
+export default component$(() => {
+    const paths = useSignal('[]')
+    const path_collection = $(async () => paths.value = await invoke('get_location_variables'))
+    const state = useStore<Locations>({ locations: [] });
+
+    const search = useSignal('');
+
+    // eslint-disable-next-line qwik/no-use-visible-task
+    useVisibleTask$(async () => {
+        await path_collection()
+        const parsed_config: Locations = JSON.parse(paths.value);
+        console.log(parsed_config);
+        console.log(parsed_config.locations[0].url);
+        state.locations = parsed_config.locations
+    });
+
+    return (
+        <>
+            <input type="text" placeholder="Search..." class="input input-bordered w-full max-w-xs m-5" onInput$={(e) => search.value = (e.target as HTMLInputElement).value} />
+            <ul role="list" class="grid grid-cols-2 2xl:grid-cols-4 3xl:grid-cols-6 gap-3">
+            {state.locations.filter((record) => record.title.toLowerCase().includes(search.value.toLowerCase())).map((record) => {
+                return (
+                    <div class="card w-96 bg-primary text-primary-content" key={record.title}>
+                        <div class="card-body">
+                            <h2 class="card-title">{record.title}</h2>
+                            <p class="break-words text-wrap">{record.url}</p>
+                            <div class="card-actions justify-end">
+                                <button class="btn" onClick$={() => {
+                                    new WebviewWindow(uuidv4(), {
+                                        title: record.title,
+                                        url: record.url,
+                                        height: 800,
+                                        width: 1200
+                                    })
+                                }}>Link
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )
+            })
+            }
+        </ul>
+        </>
+    );
+});
