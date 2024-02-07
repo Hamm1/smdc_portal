@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "build": "npm run tauri build",
-    "build:debug": "cargo tauri build --debug",
+    "build:debug": "npm run tauri build -- --debug",
     "qwik:build": "qwik build",
     "build.client": "vite build",
     "build.preview": "vite build --ssr src/entry.preview.tsx",
