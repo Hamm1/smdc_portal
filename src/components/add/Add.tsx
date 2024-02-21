@@ -1,11 +1,14 @@
 
 import { $, component$, useSignal} from '@builder.io/qwik';
 import { invoke } from '@tauri-apps/api/core';
+import { v4 as uuidv4 } from 'uuid';
 import Swal from 'sweetalert2';
 
 interface Location {
+    id: string,
     title: string;
     url: string;
+    removable: boolean
 }
 
 export default component$(() => {
@@ -33,8 +36,13 @@ export default component$(() => {
     })
 
     const submit_button = $(async () => {
-        if (title.value !== '' && url.value !== '' && url.value.includes("https://") && url.value.includes(".smdc.army.mil")){
-            const json_from_submit: Location = {title:title?.value,url:url?.value}
+        if (title.value !== '' && url.value !== '' && url.value.toLowerCase().includes("https://") && url.value.toLowerCase().includes(".smdc.army.mil")){
+            const json_from_submit: Location = {
+                id:uuidv4(),
+                title:title?.value,
+                url:url?.value.toLowerCase(),
+                removable:true
+            }
             const new_json: string = JSON.stringify(json_from_submit)
             const v = await invoke('get_additional_variables', {qwik: new_json})
             console.log(v);

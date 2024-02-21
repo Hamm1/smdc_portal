@@ -1,7 +1,8 @@
 import { component$ } from "@builder.io/qwik";
 // import { SMDCLogo } from "../icons/smdc";
 import styles from "./header.module.css";
-import { WebviewWindow } from "@tauri-apps/api/webview";
+import { Window } from '@tauri-apps/api/window'
+import { Webview} from "@tauri-apps/api/webview";
 
 export default component$(() => {
   return (
@@ -18,11 +19,12 @@ export default component$(() => {
             <a
               href="#"
               onClick$={() => {
-                new WebviewWindow("helpdesktool", {
-                    title: "Documentation",
+                new Webview((new Window("Documentation")),"helpdesktool", {
                     url: "https://helpdesktool.smdch.smdc.army.mil",
                     height: 800,
-                    width: 1200
+                    width: 1200,
+                    x: 0,
+                    y: 0
                 })
               }}
             >
@@ -33,11 +35,12 @@ export default component$(() => {
             <a
               href="#"
               onClick$={() => {
-                new WebviewWindow("kmst", {
-                    title: "KMST",
+                new Webview((new Window("KMST")),"kmst", {
                     url: "https://kmst.smdc.army.mil/",
                     height: 800,
-                    width: 1200
+                    width: 1200,
+                    x: 0,
+                    y: 0
                 })
               }}
             >
@@ -48,11 +51,12 @@ export default component$(() => {
             <a
               href="#"
               onClick$={() => {
-                new WebviewWindow("Sharepoint", {
-                    title: "Sharepoint",
+                new Webview((new Window("Sharepoint")),"Sharepoint", {
                     url: "https://armyeitaas.sharepoint-mil.us/sites/USASMDC",
                     height: 800,
-                    width: 1200
+                    width: 1200,
+                    x: 0,
+                    y: 0
                 })
               }}
             >
