@@ -26,31 +26,31 @@
     "tauri": "tauri"
   },
   "devDependencies": {
-    "@builder.io/qwik": "^1.4.5",
-    "@builder.io/qwik-city": "^1.4.5",
-    "@types/eslint": "8.56.4",
-    "@types/node": "^20.11.21",
+    "@builder.io/qwik": "^1.5.1",
+    "@builder.io/qwik-city": "^1.5.1",
+    "@types/eslint": "8.56.5",
+    "@types/node": "^20.11.25",
     "@types/uuid": "^9.0.8",
-    "@typescript-eslint/eslint-plugin": "7.1.0",
-    "@typescript-eslint/parser": "7.1.0",
-    "autoprefixer": "^10.4.17",
+    "@typescript-eslint/eslint-plugin": "7.1.1",
+    "@typescript-eslint/parser": "7.1.1",
+    "autoprefixer": "^10.4.18",
     "daisyui": "^4.7.2",
     "eslint": "8.57.0",
-    "eslint-plugin-qwik": "^1.4.5",
+    "eslint-plugin-qwik": "^1.5.1",
     "postcss": "^8.4.35",
     "prettier": "3.2.5",
-    "sweetalert2": "11.10.5",
+    "sweetalert2": "11.10.6",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
-    "typescript": "5.3.3",
-    "undici": "6.6.2",
+    "typescript": "5.4.2",
+    "undici": "6.7.0",
     "uuid": "^9.0.1",
-    "vite": "5.1.4",
+    "vite": "5.1.5",
     "vite-tsconfig-paths": "4.3.1"
   },
   "dependencies": {
-    "@tauri-apps/api": "2.0.0-beta.3",
-    "@tauri-apps/cli": "2.0.0-beta.6",
-    "@tauri-apps/plugin-shell": "2.0.0-beta.1"
+    "@tauri-apps/api": "2.0.0-beta.4",
+    "@tauri-apps/cli": "2.0.0-beta.8",
+    "@tauri-apps/plugin-shell": "2.0.0-beta.2"
   }
 }
