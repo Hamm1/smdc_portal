@@ -50,8 +50,7 @@
           "resizable": true,
           "title": "SMDC Portal",
           "width": 850,
-          "center": true,
-          "fileDropEnabled": false
+          "center": true
         }
       ],
       "withGlobalTauri": true
