@@ -18,6 +18,7 @@ export default component$(() => {
           <li>
             <a
               href="#"
+              class=" text-slate-900 hover:text-slate-400 dark:text-white"
               onClick$={() => {
                 new Webview((new Window("Documentation")),"helpdesktool", {
                     url: "https://helpdesktool.smdch.smdc.army.mil",
@@ -34,6 +35,7 @@ export default component$(() => {
           <li>
             <a
               href="#"
+              class=" text-slate-900 hover:text-slate-400 dark:text-white"
               onClick$={() => {
                 new Webview((new Window("KMST")),"kmst", {
                     url: "https://kmst.smdc.army.mil/",
@@ -50,6 +52,7 @@ export default component$(() => {
           <li>
             <a
               href="#"
+              class=" text-slate-900 hover:text-slate-400 dark:text-white"
               onClick$={() => {
                 new Webview((new Window("Sharepoint")),"Sharepoint", {
                     url: "https://armyeitaas.sharepoint-mil.us/sites/USASMDC",

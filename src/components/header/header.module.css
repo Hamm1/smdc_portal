@@ -27,15 +27,15 @@
 }
 
 .header li a {
-  color: white;
+  /* color: white; */
   display: inline-block;
   padding: 0;
   text-decoration: none;
 }
 
-.header li a:hover {
+/* .header li a:hover {
   color: var(--qwik-light-blue);
-}
+} */
 
 @media (min-width: 450px) {
   .header li {

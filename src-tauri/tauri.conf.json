@@ -41,7 +41,16 @@
     "app": {
       "macOSPrivateApi": false,
       "security": {
-        "csp": null
+        "csp": null,
+        "assetProtocol": {
+          "enable": false,
+          "scope": []
+        },
+        "dangerousDisableAssetCspModification": false,
+        "freezePrototype": false,
+        "pattern": {
+          "use": "brownfield"
+        }
       },
       "windows": [
         {
@@ -50,7 +59,8 @@
           "resizable": true,
           "title": "SMDC Portal",
           "width": 850,
-          "center": true
+          "center": true,
+          "decorations": true
         }
       ],
       "withGlobalTauri": true
