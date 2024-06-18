@@ -239,5 +239,5 @@ pub fn get_user() -> String {
 
 #[tauri::command]
 pub fn get_computer_name() -> String {
-    return whoami::hostname();
+    return whoami::fallible::hostname().unwrap_or("default".to_string());
 }

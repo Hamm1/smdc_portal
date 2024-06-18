@@ -1,9 +1,10 @@
 
 import { $, component$, useVisibleTask$, useSignal, useStore} from '@builder.io/qwik';
 import { invoke } from '@tauri-apps/api/core';
-import { Window } from '@tauri-apps/api/window'
-import { Webview } from "@tauri-apps/api/webview";
+// import { Window } from '@tauri-apps/api/window'
+// import { Webview } from "@tauri-apps/api/webview";
 import { v4 as uuidv4 } from 'uuid';
+import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 
 interface Location {
     id: string,
@@ -46,13 +47,12 @@ export default component$(() => {
                             <p class="break-words text-wrap">{record.url}</p>
                             <div class="card-actions justify-end">
                                 <button class="btn" onClick$={() => {
-                                    new Webview((new Window(uuidv4())),uuidv4(), {
+                                    new WebviewWindow(uuidv4(), {
                                         incognito: true,
+                                        title: record.title,
                                         url: record.url,
                                         height: 800,
-                                        width: 1200,
-                                        x: 800,
-                                        y: 1200
+                                        width: 1200
                                     })
                                 }}>Link
                                 </button>

@@ -84,7 +84,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.once.outputs.upload_url }}
-          asset_path: ./src-tauri/target/release/smdc-portal
+          asset_path: ./src-tauri/target/release/smdc_portal
           asset_name: SMDC-Portal
           asset_content_type: application/executable
 
@@ -120,7 +120,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.once.outputs.upload_url }}
-          asset_path: ./src-tauri/target/release/smdc-portal
+          asset_path: ./src-tauri/target/release/smdc_portal
           asset_name: SMDC-Portal-Darwin
           asset_content_type: application/executable
 #         uses: actions/upload-artifact@v3
