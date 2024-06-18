@@ -54,16 +54,16 @@ jobs:
 
       - name: Package install Windows
         if: matrix.platform == 'windows-latest'
-        run: npm install @tauri-apps/cli-win32-x64-msvc
+        run: npm install @tauri-apps/cli-win32-x64-msvc --force
 
       - name: Package install MacOS
         if: matrix.platform == 'macos-latest'
-        run: npm install @tauri-apps/cli-darwin-x64
+        run: npm install @tauri-apps/cli-darwin-x64 --force
 
       - name: Package install Ubuntu
         if: matrix.platform == 'ubuntu-latest'
         run: |
-          npm install @tauri-apps/cli-linux-x64-gnu \
+          npm install @tauri-apps/cli-linux-x64-gnu --force \
           && sudo apt update \
           && sudo apt install libdbus-1-dev pkg-config \
           zlib1g libevent-dev libwebkit2gtk-4.0-dev \
