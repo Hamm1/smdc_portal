@@ -5,6 +5,7 @@
 )]
 
 mod environment;
+mod helpers;
 
 fn main() {
   tauri::Builder::default()

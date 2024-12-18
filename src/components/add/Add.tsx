@@ -46,7 +46,7 @@ export default component$(() => {
             const new_json: string = JSON.stringify(json_from_submit)
             const v = await invoke('get_additional_variables', {qwik: new_json})
             console.log(v);
-            (document.getElementById("dialog") as HTMLDialogElement).close() as any
+            (document.getElementById("dialog") as HTMLDialogElement).close()
             window.location.reload()
         } else if(title.value === '') {
             sweet_alert("Title can not be blank")
@@ -59,11 +59,18 @@ export default component$(() => {
         }
       })
 
+      const reset_input = $(async () => {
+        title.value = '';
+        url.value = '';
+        (document.getElementById('input_title') as HTMLInputElement).value = '';
+        (document.getElementById('input_url') as HTMLInputElement).value = ''
+      })
+
       return (
         <>
             <div>
                 <div>
-                    <button class="btn m-5 float-right mt-5 ml-auto" onClick$={() => (document.getElementById("dialog") as HTMLDialogElement).showModal() as any}>
+                    <button class="btn m-5 float-right mt-5 ml-auto" onClick$={() => (document.getElementById("dialog") as HTMLDialogElement).showModal()}>
                         ADD
                     </button>
                 </div>
@@ -71,15 +78,19 @@ export default component$(() => {
                     <div class="modal-box">
                         <h3 class="font-bold text-lg">Links</h3>
                         <p class="py-4">Add a Title and URL, the URL must contain https:// and be a smdc domain.</p>
-                        <input type="text" placeholder="Title..." class="input input-bordered w-full max-w-xs m-3" onInput$={(e) => title.value = (e.target as HTMLInputElement).value} />
-                        <input type="text" placeholder="URL..." class="input input-bordered w-full max-w-xs m-3" onInput$={(e) => url.value = (e.target as HTMLInputElement).value} />
+                        <input id="input_title" type="text" placeholder="Title..." class="input input-bordered w-full max-w-xs m-3" onInput$={(e) => title.value = (e.target as HTMLInputElement).value} />
+                        <input id="input_url" type="text" placeholder="URL..." class="input input-bordered w-full max-w-xs m-3" onInput$={(e) => url.value = (e.target as HTMLInputElement).value} />
                         <button class="btn btn-info btn-outline m-3" onClick$={() => submit_button()}>
                             Submit
                         </button>
-                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick$={() => (document.getElementById("dialog") as HTMLDialogElement).close() as any}>✕</button>
+                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick$={() => {
+                            (document.getElementById("dialog") as HTMLDialogElement).close();
+                            reset_input()
+                            }}>✕
+                        </button>
                     </div>
                     <form method="dialog" class="modal-backdrop">
-                        <button>close</button>
+                        <button onClick$={() =>{reset_input()}}>close</button>
                     </form>
                 </dialog>
             </div>

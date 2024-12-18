@@ -25,7 +25,7 @@ install:
 	bun install || npm install
 
 build:
-	(bun install && bun run build:debug) || (npm install -force && npm run build:debug)
+	(bun install && bun run build:bun:debug) || (npm install -force && npm run build:debug)
 
 release:
 	bun run build || npm run build
@@ -37,7 +37,7 @@ format:
 	npm run format
 
 clean:
-	python3 clean.py || python clean.py
+	bun run clean || npm run clean
 
 upgrade:
 	bun x npm-check-updates -u || npx npm-check-updates -u

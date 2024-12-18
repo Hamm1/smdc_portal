@@ -37,7 +37,17 @@ export default component$(() => {
 
     return (
         <>
-            <input type="text" placeholder="Search..." class="input input-bordered w-full max-w-xs m-5" onInput$={(e) => search.value = (e.target as HTMLInputElement).value} />
+            <input id="search_field" type="text" placeholder="Search..." class="input input-bordered w-full max-w-xs m-5" onInput$={(e) => search.value = (e.target as HTMLInputElement).value} />
+            {search.value != '' ?
+                <button class="btn btn-square btn-outline btn-error" onClick$={() => {
+                        search.value = '';
+                        (document.getElementById('search_field') as HTMLInputElement).select();
+                        (document.getElementById('search_field') as HTMLInputElement).value = ''
+                    }} >
+                    ✕
+                </button>
+                : <></>
+            }
             <ul role="list" class="grid grid-cols-2 2xl:grid-cols-4 3xl:grid-cols-6 gap-3">
             {state.locations.filter((record) => record.title.toLowerCase().includes(search.value.toLowerCase())).map((record) => {
                 return (

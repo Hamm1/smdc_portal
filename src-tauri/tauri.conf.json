@@ -31,7 +31,7 @@
       },
       "resources": [],
       "shortDescription": "",
-      "targets": "all",
+      "targets": ["app","deb","dmg","msi","nsis","rpm"],
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",

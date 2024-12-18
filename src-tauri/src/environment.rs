@@ -27,8 +27,8 @@ impl std::iter::FromIterator<Location> for Locations {
 
 #[tauri::command]
 pub fn get_location_variables() -> String {
-    let path = get_config_path("locations".into());
-    create_missing_directory(path.to_owned(), "locations".into());
+    let path = crate::helpers::get_config_path("locations".into());
+    crate::helpers::create_missing_directory(path.to_owned(), "locations".into());
     let mut file = match File::open(&path){
         Ok(file) => file,
         Err(error) => match error.kind() {
@@ -59,7 +59,7 @@ pub fn get_location_variables() -> String {
                                                             Location{id:"9".to_string(),title: "Help Desk Web Tool".to_string(), url: "https://smdchdwi/ticket".to_string(),removable:false},
                                                         ]
                                         };
-                    match std::fs::write(get_config_path("locations".into()), match serde_json::to_string(&con){
+                    match std::fs::write(crate::helpers::get_config_path("locations".into()), match serde_json::to_string(&con){
                             Ok(r) => r,
                             Err(error) => error.to_string()
                     }){
@@ -70,8 +70,8 @@ pub fn get_location_variables() -> String {
                     }
     };
 
-    let path = get_config_path("additional".into());
-    create_missing_directory(path.to_owned(), "additional".into());
+    let path = crate::helpers::get_config_path("additional".into());
+    crate::helpers::create_missing_directory(path.to_owned(), "additional".into());
     let mut file = match File::open(&path){
         Ok(file) => file,
         Err(error) => match error.kind() {
@@ -91,7 +91,7 @@ pub fn get_location_variables() -> String {
         Ok(json2) => json2,
         Err(_) => {
                     let con = Locations{ locations: vec![] };
-                    match std::fs::write(get_config_path("additional".into()), match serde_json::to_string(&con){
+                    match std::fs::write(crate::helpers::get_config_path("additional".into()), match serde_json::to_string(&con){
                             Ok(r) => r,
                             Err(error) => error.to_string()
                     }){
@@ -116,8 +116,8 @@ pub fn get_additional_variables(qwik: &str) -> String {
         Err(_) => return "Error".to_string()
     };
 
-    let path = get_config_path("additional".into());
-    create_missing_directory(path.to_owned(), "additional".into());
+    let path = crate::helpers::get_config_path("additional".into());
+    crate::helpers::create_missing_directory(path.to_owned(), "additional".into());
     let mut file = match File::open(&path){
         Ok(file) => file,
         Err(error) => match error.kind() {
@@ -137,7 +137,7 @@ pub fn get_additional_variables(qwik: &str) -> String {
         Ok(json) => json,
         Err(_) => {
                     let con = Locations{ locations: vec![]};
-                    match std::fs::write(get_config_path("additional".into()), match serde_json::to_string(&con){
+                    match std::fs::write(crate::helpers::get_config_path("additional".into()), match serde_json::to_string(&con){
                             Ok(r) => r,
                             Err(error) => error.to_string()
                     }){
@@ -150,7 +150,7 @@ pub fn get_additional_variables(qwik: &str) -> String {
     json.locations.push(additional_json);
     println!("{:?}", json);
     
-    match std::fs::write(get_config_path("additional".into()), match serde_json::to_string(&json){
+    match std::fs::write(crate::helpers::get_config_path("additional".into()), match serde_json::to_string(&json){
         Ok(r) => r,
         Err(error) => error.to_string()
         }){
@@ -164,8 +164,8 @@ pub fn get_additional_variables(qwik: &str) -> String {
 #[tauri::command]
 pub fn get_additional_variables_remove(id: &str) -> String {
 
-    let path = get_config_path("additional".into());
-    create_missing_directory(path.to_owned(), "additional".into());
+    let path = crate::helpers::get_config_path("additional".into());
+    crate::helpers::create_missing_directory(path.to_owned(), "additional".into());
     let mut file = match File::open(&path){
         Ok(file) => file,
         Err(error) => match error.kind() {
@@ -185,7 +185,7 @@ pub fn get_additional_variables_remove(id: &str) -> String {
         Ok(json) => json,
         Err(_) => {
                     let con = Locations{ locations: vec![]};
-                    match std::fs::write(get_config_path("additional".into()), match serde_json::to_string(&con){
+                    match std::fs::write(crate::helpers::get_config_path("additional".into()), match serde_json::to_string(&con){
                             Ok(r) => r,
                             Err(error) => error.to_string()
                     }){
@@ -197,7 +197,7 @@ pub fn get_additional_variables_remove(id: &str) -> String {
     };
     let new_json = json.locations.into_iter().filter(|x| x.id != id ).collect::<Locations>();
     
-    match std::fs::write(get_config_path("additional".into()), match serde_json::to_string(&new_json){
+    match std::fs::write(crate::helpers::get_config_path("additional".into()), match serde_json::to_string(&new_json){
         Ok(r) => r,
         Err(error) => error.to_string()
         }){
@@ -206,30 +206,6 @@ pub fn get_additional_variables_remove(id: &str) -> String {
         };
 
     return "Success".to_string()
-}
-
-pub fn get_config_path(config_name: String) -> String {
-  let user = whoami::username();
-  let path = match std::env::consts::OS.as_ref() {
-        "windows" => format!("{}/{}/{}/{}{}", "C:/Users".to_string(), user, "AppData/Local/SMDC-Portal".to_string(), config_name, ".json".to_string()),
-        "linux" => "/home/".to_string() +  &user + &"/Desktop/" + &config_name + &".json".to_string(),
-        "macos" => "/Users/".to_string() +  &user + &"/Desktop/" + &config_name + &".json".to_string(),
-        _ => panic!("Unsupported OS"),
-  };
-  return path;
-}
-
-pub fn create_missing_directory(path: String, config_name: String) -> String {
-    let new_path = config_name + ".json";
-    let path = path.replace(&new_path, "");
-    if !(std::path::Path::new(&path).exists()){
-        match std::fs::create_dir_all(path){
-            Ok(_) => return "Created".to_string(),
-            Err(_) => return "Error".to_string()
-        };
-    } else {
-        return "Directory Exists".to_string()
-    }
 }
 
 #[tauri::command]
