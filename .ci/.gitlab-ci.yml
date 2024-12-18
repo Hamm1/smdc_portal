@@ -12,7 +12,7 @@ smdc_portal_build:
   script:
     - echo "Building the project..."
     - apt update
-    - apt install libdbus-1-dev pkg-config zlib1g libevent-dev libwebkit2gtk-4.0-dev build-essential curl wget libssl-dev libgtk-3-dev libsoup-3.0-dev libjavascriptcoregtk-4.1-dev librsvg2-dev libfuse2 libappindicator3-dev libwebkit2gtk-4.1-dev libffi-dev patchelf -y
+    - apt install unzip libdbus-1-dev pkg-config zlib1g libevent-dev libwebkit2gtk-4.0-dev build-essential curl wget libssl-dev libgtk-3-dev libsoup-3.0-dev libjavascriptcoregtk-4.1-dev librsvg2-dev libfuse2 libappindicator3-dev libwebkit2gtk-4.1-dev libffi-dev patchelf -y
     - curl -fsSL https://bun.sh/install | bash
     - curl https://sh.rustup.rs --output ./rust.sh;chmod +x ./rust.sh;./rust.sh -y;rm ./rust.sh
     - export PATH="$HOME/.bun/bin:$PATH"

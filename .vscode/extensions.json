@@ -1,4 +1,22 @@
 {
-  "recommendations": ["dbaeumer.vscode-eslint", "unifiedjs.vscode-mdx"],
+  "recommendations": [
+    "aaron-bond.better-comments",
+    "bradlc.vscode-tailwindcss",
+    "dagger.dagger",
+    "eamodio.gitlens",
+    "ecmel.vscode-html-css",
+    "johnreemar.vscode-qwik-snippets",
+    "ms-vscode.cpptools",
+    "ms-vscode.makefile-tools",
+    "ms-vscode.powershell",
+    "ms-vscode.vscode-typescript-next",
+    "oven.bun-vscode",
+    "pkief.material-icon-theme",
+    "rust-lang.rust-analyzer",
+    "tamasfe.even-better-toml",
+    "tauri-apps.tauri-vscode",
+    "vadimcn.vscode-lldb",
+    "yzhang.markdown-all-in-one",
+  ],
   "unwantedRecommendations": []
 }

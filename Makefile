@@ -16,25 +16,25 @@ endif
 $(info "$(detected_OS)")
 
 run:
-	npm run dev
+	bun run dev
 
 start:
-	npm run start
+	bun run start
 
 install:
 	bun install || npm install
 
 build:
-	(bun install && bun run build:bun:debug) || (npm install -force && npm run build:debug)
+	(bun install && bun run build:bun:debug) || (npm install -force && npm run build:npm:debug)
 
 release:
-	bun run build || npm run build
+	bun run build:bun || npm run build
 
 debug:
-	bun run build:debug || npm run build:debug
+	bun run build:bun:debug || npm run build:npm:debug
 
 format:
-	npm run format
+	bun run format
 
 clean:
 	bun run clean || npm run clean
