@@ -26,7 +26,7 @@
     "start": "vite --open --mode ssr",
     "qwik": "qwik",
     "tauri": "tauri",
-    "clean": "rm bun.lockb package-lock.json ./src-tauri/Cargo.lock || true && (rm -rf node_modules dist tmp server ./src-tauri/target || @powershell rm -recurse node_modules dist tmp server ./src-tauri/target)"
+    "clean": "rm package-lock.json ./src-tauri/Cargo.lock || true && (rm -rf node_modules dist tmp server src-tauri/target || @powershell rm -recurse node_modules dist tmp server src-tauri/target)"
   },
   "devDependencies": {
     "@builder.io/qwik": "^1.11.0",
