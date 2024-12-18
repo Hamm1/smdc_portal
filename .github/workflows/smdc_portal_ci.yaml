@@ -41,12 +41,10 @@ jobs:
         
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      # - name: Use Bun ${{ matrix.bun-version }}
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: 23
-          cache: 'npm'
-          cache-dependency-path: ./package-lock.json
+          bun-version: latest
 
       - name: install Rust
         if: matrix.platform != 'ubuntu-latest'
@@ -54,16 +52,16 @@ jobs:
 
       - name: Package install Windows
         if: matrix.platform == 'windows-latest'
-        run: npm install @tauri-apps/cli-win32-x64-msvc --force
+        run: bun install @tauri-apps/cli-win32-x64-msvc --force
 
       - name: Package install MacOS
         if: matrix.platform == 'macos-latest'
-        run: npm install @tauri-apps/cli-darwin-x64 --force
+        run: bun install @tauri-apps/cli-darwin-x64 --force
 
       - name: Package install Ubuntu
         if: matrix.platform == 'ubuntu-latest'
         run: |
-          npm install @tauri-apps/cli-linux-x64-gnu --force \
+          bun install @tauri-apps/cli-linux-x64-gnu --force \
           && sudo apt update \
           && sudo apt install libdbus-1-dev pkg-config \
           zlib1g libevent-dev libwebkit2gtk-4.0-dev \
@@ -74,7 +72,7 @@ jobs:
 
       - name: Run build
         run: |
-          npm run build
+          bun run build:bun
 
       - name: Upload Release Asset (x64) Ubuntu
         id: upload-release-asset-x64

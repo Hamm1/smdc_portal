@@ -12,21 +12,19 @@ smdc_portal_build:
   script:
     - echo "Building the project..."
     - apt update
-    - apt install libdbus-1-dev pkg-config zlib1g libevent-dev libwebkit2gtk-4.0-dev build-essential curl wget libssl-dev libgtk-3-dev libsoup-3.0-dev libjavascriptcoregtk-4.1-dev librsvg2-dev libfuse2 libappindicator3-dev libwebkit2gtk-4.1-dev libffi-dev patchelf -y
+    - apt install unzip libdbus-1-dev pkg-config zlib1g libevent-dev libwebkit2gtk-4.0-dev build-essential curl wget libssl-dev libgtk-3-dev libsoup-3.0-dev libjavascriptcoregtk-4.1-dev librsvg2-dev libfuse2 libappindicator3-dev libwebkit2gtk-4.1-dev libffi-dev patchelf -y
     - curl -SLO https://deb.nodesource.com/nsolid_setup_deb.sh; rm -f /usr/share/keyrings/nodesource.gpg; chmod 500 nsolid_setup_deb.sh; ./nsolid_setup_deb.sh 23; apt-get install nodejs -y; rm -f ./nsolid_setup_deb.sh
     - curl -fsSL https://bun.sh/install | bash
     - curl https://sh.rustup.rs --output ./rust.sh;chmod +x ./rust.sh;./rust.sh -y;rm ./rust.sh
     - export PATH="$HOME/.bun/bin:$PATH"
-    - cd ./interfaces/smdc_portal
     - bun install @tauri-apps/cli-linux-x64-gnu --force
     - export PATH="$HOME/.cargo/bin:$PATH"
     - bun run build:bun
     - mkdir -p exe
-    - cd ../..
-    - cp ./target/release/smdc_portal ./interfaces/smdc_portal/exe/smdc_portal
+    - cp ./src-tauri/target/release/smdc_portal ./exe/smdc_portal
   artifacts:
     paths:
-      - interfaces/smdc_portal/exe/smdc_portal
+      - exe/smdc_portal
 
 smdc_portal_upload_package:
   stage: .post
@@ -35,12 +33,13 @@ smdc_portal_upload_package:
     - if: '$CI_COMMIT_TAG && $CI_COMMIT_TAG =~ /^v/'
     - if: '$CI_COMMIT_TAG && $CI_COMMIT_TAG =~ /^portal-v/'
   script:
-    - 'curl -k --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file interfaces/smdc_portal/exe/smdc_portal "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/smdc_portal/${CI_COMMIT_TAG}/smdc_portal"'
+    - 'curl -k --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file exe/smdc_portal "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/smdc_portal/${CI_COMMIT_TAG}/smdc_portal"'
 
 smdc_portal_release_job:
   stage: .post
   image: curlimages/curl:latest
   rules:
+    - if: '$CI_COMMIT_TAG && $CI_COMMIT_TAG =~ /^v/'
     - if: '$CI_COMMIT_TAG && $CI_COMMIT_TAG =~ /^portal-v/'
   script: |
     echo "Creating a release..."
