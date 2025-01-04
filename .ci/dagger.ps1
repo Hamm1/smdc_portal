@@ -71,54 +71,17 @@ function Test-Dagger(){
     }
 }
 
-function Test-Python(){
-    [CmdletBinding()]
-    [OutputType([string])]
-    $python = where.exe "python.exe" | Select-Object -First 1
-    if(!(Test-Path "C:\Python313\python.exe") -and ($null -eq $python)){
-        $test_choco = & curl.exe -o /dev/null --silent -Iw '%{http_code}' 'https://community.chocolatey.org/install.ps1'
-        if ($test_choco -eq "200"){
-            if (!(Test-Path "C:\\ProgramData\\chocolatey\\bin\\choco.exe")){
-                Write-Host "Chocolatey is not installed..."
-                [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-                Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-            }
-            
-            if (Test-Path "C:\\ProgramData\\chocolatey\\bin\\choco.exe") {
-                Start-Process "C:\\ProgramData\\chocolatey\\bin\\choco.exe" -ArgumentList "install python -y" -wait
-            }
-            return "C:\Python313\python.exe"
-        } else {
-            exit(1)
-        }
-    } else {
-
-        return $python
-    }
-}
-
-function Test-Pip(){
-    [CmdletBinding()]
-    [OutputType([string])]
-    $pip = where.exe "pip.exe" | Select-Object -First 1
-    if(Test-Path "C:\Python313\Scripts\pip.exe"){
-        return "C:\Python313\Scripts\pip.exe"
-    } else {
-        return $pip
-    }
-}
-
 $test_choco = & curl.exe -o /dev/null --silent -Iw '%{http_code}' 'https://community.chocolatey.org/install.ps1'
 if ($test_choco -ne "200") {
     Write-Host -ForegroundColor Red "Unable to contact chocolatey..."
     exit(1)
 }
 
-if ((Test-Docker) -and (Test-Dagger -ne "") -and (Test-Python -ne "")){
+if ((Test-Docker) -and (Test-Dagger -ne "")){
     Get-Service com.docker.service | Start-Service -ErrorAction SilentlyContinue
     Start-Process "$($Env:ProgramFiles)\Docker\Docker\DockerCli.exe" -ArgumentList "-SwitchLinuxEngine" -Wait -NoNewWindow -ErrorAction SilentlyContinue
     Write-Host "Building..."
     # Start-Process "$(Test-Pip)" -ArgumentList "install dagger-io --upgrade" -Wait -NoNewWindow
-    Start-Process "$(Test-Dagger)" -ArgumentList "call linux --src=../ export --path=$((Split-Path (get-location).Path) + '/out/server_monitor_agent')" -Wait -NoNewWindow
-    Start-Process "$(Test-Dagger)" -ArgumentList "call windows --src=../ export --path=$((Split-Path (get-location).Path) + '/out/server_monitor_agent.exe')" -Wait -NoNewWindow
+    # Start-Process "$(Test-Dagger)" -ArgumentList "call linux --src=../ export --path=$((Split-Path (get-location).Path) + '/out/server_monitor_agent')" -Wait -NoNewWindow
+    Start-Process "$(Test-Dagger)" -ArgumentList "call windows --src=../ export --path=$((Split-Path (get-location).Path) + '/out/smdc_portal.exe')" -Wait -NoNewWindow
 }
