@@ -4,6 +4,7 @@
 /lib-types
 /server
 /tmp
+/out
 
 # Development
 node_modules

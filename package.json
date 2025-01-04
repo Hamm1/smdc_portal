@@ -26,35 +26,35 @@
     "start": "vite --open --mode ssr",
     "qwik": "qwik",
     "tauri": "tauri",
-    "clean": "rm package-lock.json ./src-tauri/Cargo.lock || true && (rm -rf node_modules dist tmp server src-tauri/target || @powershell rm -recurse node_modules dist tmp server src-tauri/target)"
+    "clean": "rm package-lock.json ./src-tauri/Cargo.lock || true && (rm -rf node_modules dist tmp server out src-tauri/target || @powershell rm -recurse node_modules dist tmp server out src-tauri/target)"
   },
   "devDependencies": {
-    "@builder.io/qwik": "^1.11.0",
-    "@builder.io/qwik-city": "^1.11.0",
+    "@builder.io/qwik": "^1.12.0",
+    "@builder.io/qwik-city": "^1.12.0",
     "@types/eslint": "9.6.1",
-    "@types/node": "^22.10.2",
+    "@types/node": "^22.10.5",
     "@types/uuid": "^10.0.0",
-    "@typescript-eslint/eslint-plugin": "8.18.1",
-    "@typescript-eslint/parser": "8.18.1",
-    "@typescript-eslint/utils": "8.18.1",
+    "@typescript-eslint/eslint-plugin": "8.19.0",
+    "@typescript-eslint/parser": "8.19.0",
+    "@typescript-eslint/utils": "8.19.0",
     "autoprefixer": "^10.4.20",
-    "daisyui": "^4.12.22",
+    "daisyui": "^4.12.23",
     "eslint": "9.17.0",
-    "eslint-plugin-qwik": "^1.11.0",
+    "eslint-plugin-qwik": "^1.12.0",
     "postcss": "^8.4.49",
     "prettier": "3.4.2",
-    "sweetalert2": "11.15.2",
+    "sweetalert2": "11.15.10",
     "tailwindcss": "^3.4.17",
     "ts-node": "^10.9.2",
     "typescript": "5.7.2",
     "undici": "7.2.0",
     "uuid": "^11.0.3",
-    "vite": "6.0.3",
+    "vite": "6.0.7",
     "vite-tsconfig-paths": "5.1.4"
   },
   "dependencies": {
-    "@tauri-apps/api": "2.1.1",
-    "@tauri-apps/cli": "2.1.0",
+    "@tauri-apps/api": "2.2.0",
+    "@tauri-apps/cli": "2.2.2",
     "@tauri-apps/plugin-shell": "2.2.0"
   }
 }

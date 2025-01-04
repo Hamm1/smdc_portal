@@ -37,7 +37,7 @@ Built using Qwik, Tauri, and Tailwinds.
 - Debug
 ```sh
 bun install || npm install
-bun run build:debug:bun || npm run build:debug
+bun run build:bun:debug || npm run build:npm:debug
 ```
 - Release
 ```sh

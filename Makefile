@@ -42,6 +42,9 @@ clean:
 upgrade:
 	bun x npm-check-updates -u || npx npm-check-updates -u
 
+docker:
+	docker build -t tauri --output type=local,dest=./out/ . || sudo docker build -t tauri --output type=local,dest=./out/ .
+
 icon:
 	@curl -s $(ICONS_URL)/$(icon).svg -o $(component_name).$(COMPONENT_EXTENSION)
 ifeq ($(size), true)
