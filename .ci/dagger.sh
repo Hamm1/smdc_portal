@@ -35,15 +35,15 @@ function run_linux() {
             /sbin/modprobe iptable-nat
             systemctl stop docker
             systemctl start docker
-            dagger call linux --src=../ export --path=./out/smdc_portal
-            dagger call windows --src=../ export --path=./out/smdc_portal.exe
+            dagger call linux --src=../ export --path="$(dirname $(pwd))/out/smdc_portal"
+            dagger call windows --src=../ export --path="$(dirname $(pwd))/out/smdc_portal.exe"
         else
             echo "Starting Docker..."
             /sbin/modprobe iptable-nat
             systemctl start docker
             sleep 3
-            dagger call linux --src=../ export --path=./out/smdc_portal
-            dagger call windows --src=../ export --path=./out/smdc_portal.exe
+            dagger call linux --src=../ export --path="$(dirname $(pwd))/out/smdc_portal"
+            dagger call windows --src=../ export --path="$(dirname $(pwd))/out/smdc_portal.exe"
         fi
     fi
 }
@@ -54,8 +54,8 @@ function run_macos() {
         if [ ! -z "$CHECK" ]
         then
             echo "Docker is running..."
-            dagger call linux --src=../ export --path=./out/smdc_portal
-            dagger call windows --src=../ export --path=./out/smdc_portal.exe
+            dagger call linux --src=../ export --path="$(dirname $(pwd))/out/smdc_portal"
+            dagger call windows --src=../ export --path="$(dirname $(pwd))/out/smdc_portal.exe"
         else
             echo "Docker is not running..."
             exit 1

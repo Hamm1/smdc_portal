@@ -6,6 +6,30 @@ SMDC Portal application for keeping track of related sites and tools.
 
 Built using Qwik, Tauri, and Tailwinds.
 
+## Build App
+- Debug
+  - If Rust and Bun are installed 
+```sh
+bun install
+bun run build:bun:debug
+```
+- Release
+  - Will Build without any dependancies. However it will install Docker and Dagger
+```sh
+make dagger
+<!-- or -->
+pwsh .ci/dagger.ps1
+<!-- or -->
+docker build -t tauri --output type=local,dest=./out/ .
+<!-- or -->
+make docker
+``` 
+  - If Rust and Bun are installed 
+```sh
+bun install
+bun run build:bun
+```
+
 ## Dependancies
 ### OS Environment
 - Arch
@@ -33,14 +57,4 @@ Built using Qwik, Tauri, and Tailwinds.
 - Bun
 - Git
 
-## Build App
-- Debug
-```sh
-bun install || npm install
-bun run build:bun:debug || npm run build:npm:debug
-```
-- Release
-```sh
-bun install || npm install
-bun run build:bun || npm run build
-```
+

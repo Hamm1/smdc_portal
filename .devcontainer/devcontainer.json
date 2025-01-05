@@ -1,0 +1,44 @@
+
+{
+	"name": "smdc_portal",
+	"build": { "dockerfile": "Dockerfile" },
+
+	"features": {
+        // "ghcr.io/devcontainers/features/python:1": {},
+        "ghcr.io/devcontainers/features/git:1":{},
+		// "ghcr.io/devcontainers/features/powershell:1":{},
+		// "ghcr.io/devcontainers-contrib/features/ansible:2":{},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
+		// "ghcr.io/devcontainers/features/rust:1": {}
+    },
+
+	"forwardPorts": [
+		3000
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"mads-hartmann.bash-ide-vscode",
+				"aaron-bond.better-comments",
+				"ms-vscode.cpptools",
+				"vadimcn.vscode-lldb",
+				"denoland.vscode-deno",
+				"ms-azuretools.vscode-docker",
+				"eamodio.gitlens",
+				"ms-vscode.vscode-typescript-next",
+				"ms-vscode.makefile-tools",
+				"PKief.material-icon-theme",
+				"ms-vscode.powershell",
+				"rust-lang.rust-analyzer",
+				"bradlc.vscode-tailwindcss",
+				"tauri-apps.tauri-vscode",
+				"tamasfe.even-better-toml",
+				"ecmel.vscode-html-css",
+				"yzhang.markdown-all-in-one",
+				"oven.bun-vscode",
+				"johnreemar.vscode-qwik-snippets",
+				"dagger.dagger"
+			]
+		}
+	}
+}

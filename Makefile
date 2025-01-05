@@ -1,12 +1,4 @@
-name                ?=
-icon                ?=
-size                ?= false
-
-ICONS_URL           := https://raw.githubusercontent.com/twbs/icons/main/icons
-ICONS_PATH          := ./src/components/icons
-COMPONENT_EXTENSION := astro
-ASTRO_PROPS         := $(shell echo '---\nexport interface Props {\n  size: number;\n}\n\nconst { size } = Astro.props;\n---\n\n')
-SVELTE_PROPS        := $(shell echo '<script lang="ts">\n\texport let size\: number;\n<\/script>\n\n')
+MAKE := make
 
 ifeq ($(OS),Windows_NT) 
 detected_OS := Windows
@@ -14,6 +6,12 @@ else
 detected_OS := $(shell sh -c 'uname 2>/dev/null || echo Unknown')
 endif
 $(info "$(detected_OS)")
+
+ifeq ($(OS),Windows_NT)
+cwd := $(shell pwsh -c '($$(PWD).Path) || echo Unknown')
+else
+cwd := $(shell sh -c '${PWD} || pwd || echo Unknown')
+endif
 
 run:
 	bun run dev
@@ -45,16 +43,41 @@ upgrade:
 docker:
 	docker build -t tauri --output type=local,dest=./out/ . || sudo docker build -t tauri --output type=local,dest=./out/ .
 
-icon:
-	@curl -s $(ICONS_URL)/$(icon).svg -o $(component_name).$(COMPONENT_EXTENSION)
-ifeq ($(size), true)
-ifeq ($(COMPONENT_EXTENSION), svelte)
-	@sed -i "" -e '1s/^/$(SVELTE_PROPS)/' $(component_name).$(COMPONENT_EXTENSION)
-else
-	@sed -i "" -e '1s/^/$(ASTRO_PROPS)/' $(component_name).$(COMPONENT_EXTENSION)
+dagger:
+ifeq ($(detected_OS),Linux)
+	cd .ci && .\dagger.sh
 endif
-	@sed -i "" -e 's/width="16"/width={size}/g' $(component_name).$(COMPONENT_EXTENSION) \
-	&& sed -i "" -e 's/height="16"/height={size}/g' $(component_name).$(COMPONENT_EXTENSION)
+ifeq ($(detected_OS),Darwin)
+	cd .ci && .\dagger.sh
 endif
-	@echo '' >> $(component_name).$(COMPONENT_EXTENSION) \
-	&& mv $(component_name).$(COMPONENT_EXTENSION) $(ICONS_PATH)
+ifeq ($(detected_OS),Windows)
+	cd .ci && pwsh .\dagger.ps1
+endif
+
+flox:
+	(sudo docker run --pull always -v $(cwd):/hd_platform -v $(cwd)/.flox/build/zshrc:/root/.zshrc -v /var/run/docker.sock:/var/run/docker.sock --name=flox -d -it ghcr.io/flox/flox || \
+	 docker run --pull always -v $(cwd):/hd_platform -v $(cwd)/.flox/build/zshrc:/root/.zshrc -v /var/run/docker.sock:/var/run/docker.sock --name=flox -d -it ghcr.io/flox/flox) || (echo "Container Exists")
+	(sudo docker start flox || docker start flox) || (echo "Container is already started...")
+	(sudo docker exec -it -w /hd_platform flox flox activate || docker exec -it -w /hd_platform flox flox activate)
+
+flox_delete:
+	sudo docker rm -f flox || docker rm -f flox
+
+code_server:
+ifeq ($(detected_OS),Linux)
+	(sudo docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(cwd):$(cwd) --name=code_server -p 8080:8080 -d matthewhambright/code_server:latest || \
+	 docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(cwd):$(cwd) --name=code_server -p 8080:8080 -d matthewhambright/code_server:latest) || (echo "Container Exists")
+endif
+ifeq ($(detected_OS),Darwin)
+	(sudo docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(cwd):$(cwd) --name=code_server -p 8080:8080 -d matthewhambright/code_server:latest || \
+	 docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(cwd):$(cwd) --name=code_server -p 8080:8080 -d matthewhambright/code_server:latest) || (echo "Container Exists")
+endif
+ifeq ($(detected_OS),Windows)
+	(docker run -v //var/run/docker.sock:/var/run/docker.sock -v $(cwd):/workspace/smdc_portal --name=code_server -p 8080:8080 -d matthewhambright/code_server:latest) || (echo "Container Exists")
+endif
+
+code_server_use:
+	sudo docker exec -it code_server zsh || docker exec -it code_server zsh
+
+code_server_delete:
+	sudo docker rm -f code_server || docker rm -f code_server

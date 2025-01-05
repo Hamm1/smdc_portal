@@ -1,24 +1,8 @@
 FROM ubuntu:22.04 AS build_linux
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
-    curl \
-    wget \
-    git \
-    pkg-config \
-    libssl-dev \
-    libgtk-3-dev \
-    librsvg2-dev \
-    mingw-w64 \
-    wine64 \
-    unzip \
-    python3 \
-    gcc \
-    g++ \
-    make \
-    nsis \
-    lld \
-    llvm \
-    clang \
+    curl wget git pkg-config libssl-dev libgtk-3-dev librsvg2-dev mingw-w64 \
+    wine64 unzip python3 gcc g++ make nsis lld llvm clang \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y

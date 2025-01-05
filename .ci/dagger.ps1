@@ -81,7 +81,6 @@ if ((Test-Docker) -and (Test-Dagger -ne "")){
     Get-Service com.docker.service | Start-Service -ErrorAction SilentlyContinue
     Start-Process "$($Env:ProgramFiles)\Docker\Docker\DockerCli.exe" -ArgumentList "-SwitchLinuxEngine" -Wait -NoNewWindow -ErrorAction SilentlyContinue
     Write-Host "Building..."
-    # Start-Process "$(Test-Pip)" -ArgumentList "install dagger-io --upgrade" -Wait -NoNewWindow
-    # Start-Process "$(Test-Dagger)" -ArgumentList "call linux --src=../ export --path=$((Split-Path (get-location).Path) + '/out/server_monitor_agent')" -Wait -NoNewWindow
+    Start-Process "$(Test-Dagger)" -ArgumentList "call linux --src=../ export --path=$((Split-Path (get-location).Path) + '/out/smdc_portal')" -Wait -NoNewWindow
     Start-Process "$(Test-Dagger)" -ArgumentList "call windows --src=../ export --path=$((Split-Path (get-location).Path) + '/out/smdc_portal.exe')" -Wait -NoNewWindow
 }
