@@ -45,20 +45,20 @@ docker:
 
 dagger:
 ifeq ($(detected_OS),Linux)
-	cd .ci && .\dagger.sh
+	cd .ci && ./dagger.sh
 endif
 ifeq ($(detected_OS),Darwin)
-	cd .ci && .\dagger.sh
+	cd .ci && ./dagger.sh
 endif
 ifeq ($(detected_OS),Windows)
-	cd .ci && pwsh .\dagger.ps1
+	cd .ci && pwsh ./dagger.ps1
 endif
 
 flox:
-	(sudo docker run --pull always -v $(cwd):/hd_platform -v $(cwd)/.flox/build/zshrc:/root/.zshrc -v /var/run/docker.sock:/var/run/docker.sock --name=flox -d -it ghcr.io/flox/flox || \
-	 docker run --pull always -v $(cwd):/hd_platform -v $(cwd)/.flox/build/zshrc:/root/.zshrc -v /var/run/docker.sock:/var/run/docker.sock --name=flox -d -it ghcr.io/flox/flox) || (echo "Container Exists")
+	(sudo docker run --pull always -v $(cwd):/smdc_portal -v $(cwd)/.flox/build/zshrc:/root/.zshrc -v /var/run/docker.sock:/var/run/docker.sock --name=flox -d -it ghcr.io/flox/flox || \
+	 docker run --pull always -v $(cwd):/smdc_portal -v $(cwd)/.flox/build/zshrc:/root/.zshrc -v /var/run/docker.sock:/var/run/docker.sock --name=flox -d -it ghcr.io/flox/flox) || (echo "Container Exists")
 	(sudo docker start flox || docker start flox) || (echo "Container is already started...")
-	(sudo docker exec -it -w /hd_platform flox flox activate || docker exec -it -w /hd_platform flox flox activate)
+	(sudo docker exec -it -w /smdc_portal flox flox activate || docker exec -it -w /smdc_portal flox flox activate)
 
 flox_delete:
 	sudo docker rm -f flox || docker rm -f flox
