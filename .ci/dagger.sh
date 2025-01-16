@@ -54,8 +54,8 @@ function run_macos() {
         if [ ! -z "$CHECK" ]
         then
             echo "Docker is running..."
-            dagger call linux --src=../ export --path="$(dirname $(pwd))/out/smdc_portal"
             dagger call windows --src=../ export --path="$(dirname $(pwd))/out/smdc_portal.exe"
+            dagger call linux --src=../ export --path="$(dirname $(pwd))/out/smdc_portal"
         else
             echo "Docker is not running..."
             exit 1

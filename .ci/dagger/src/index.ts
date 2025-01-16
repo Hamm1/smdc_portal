@@ -1,11 +1,11 @@
-import { dag, Directory, object, func, File } from "@dagger.io/dagger"
+import { dag, Directory, object, func, File, Platform } from "@dagger.io/dagger"
 
 @object()
 export class Ci {
   @func()
   linux(src: Directory): File {
     return dag
-      .container()
+      .container({ platform: "linux/amd64" as Platform })
       .from("ubuntu:22.04")
       .withEnvVariable("DEBIAN_FRONTEND", "noninteractive")
       .withExec(["apt-get", "update"])
@@ -36,7 +36,7 @@ export class Ci {
   @func()
   windows(src: Directory): File {
     return dag
-      .container()
+      .container({ platform: "linux/amd64" as Platform })
       .from("ubuntu:22.04")
       .withEnvVariable("DEBIAN_FRONTEND", "noninteractive")
       .withExec(["apt-get", "update"])

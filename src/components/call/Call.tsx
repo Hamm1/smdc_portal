@@ -25,8 +25,8 @@ export default component$(() => {
     const path_collection = $(async () => {
         paths.value = await invoke('get_location_variables')
         const parsed_config: Locations = JSON.parse(paths.value);
-        console.log(parsed_config);
-        console.log(parsed_config.locations[0].url);
+        // console.log(parsed_config);
+        // console.log(parsed_config.locations[0].url);
         state.locations = parsed_config.locations
     })
     

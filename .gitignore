@@ -5,6 +5,7 @@
 /server
 /tmp
 /out
+/.ci/out
 
 # Development
 node_modules
