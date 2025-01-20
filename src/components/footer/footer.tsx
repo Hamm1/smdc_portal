@@ -7,7 +7,7 @@ export default component$(() => {
 
   return (
     <footer>
-      <div class="container">
+      <div class="container text-slate-900 dark:text-white">
         <a href="#" target="_self" class={styles.anchor}>
           <span>SMDC</span>
           <span class={styles.spacer}>|</span>
