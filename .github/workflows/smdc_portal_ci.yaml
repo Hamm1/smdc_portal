@@ -64,7 +64,7 @@ jobs:
           bun install @tauri-apps/cli-linux-x64-gnu --force \
           && sudo apt update \
           && sudo apt install libdbus-1-dev pkg-config \
-          zlib1g libevent-dev libwebkit2gtk-4.0-dev \
+          zlib1g libevent-dev \
           build-essential curl wget libssl-dev \
           libgtk-3-dev libsoup-3.0-dev libjavascriptcoregtk-4.1-dev \
           librsvg2-dev libfuse2 libappindicator3-dev libwebkit2gtk-4.1-dev \
