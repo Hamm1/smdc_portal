@@ -63,17 +63,25 @@ function Test-Dagger(){
             }
             return "C:\ProgramData\chocolatey\bin\dagger.exe"
         } else {
-            exit(1)
+            $test_dagger = & curl.exe -o /dev/null --silent -Iw '%{http_code}' 'https://dl.dagger.io/dagger/install.ps1'
+            if ($test_dagger -eq "200"){
+                Invoke-WebRequest -UseBasicParsing -Uri https://dl.dagger.io/dagger/install.ps1 | Invoke-Expression;
+                Install-Dagger -InstallPath C:\ProgramData\dagger
+                return "C:\ProgramData\dagger\dagger.exe"
+            } else {
+                exit(1)
+            }
         }
     } else {
-
         return $dagger
     }
 }
 
 $test_choco = & curl.exe -o /dev/null --silent -Iw '%{http_code}' 'https://community.chocolatey.org/install.ps1'
-if ($test_choco -ne "200") {
+$test_dagger = & curl.exe -o /dev/null --silent -Iw '%{http_code}' 'https://dl.dagger.io/dagger/install.ps1'
+if ($test_choco -ne "200" -and $test_dagger -eq "200") {
     Write-Host -ForegroundColor Red "Unable to contact chocolatey..."
+    Write-Host -ForegroundColor Red "Unable to contact daggerverse..."
     exit(1)
 }
 

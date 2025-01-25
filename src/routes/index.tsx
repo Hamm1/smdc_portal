@@ -6,8 +6,8 @@ import Add from '~/components/add/Add';
 export default component$(() => {
   return (
     <>
-      <Add/>
-      <Call/>
+      <Add />
+      <Call />
     </>
   );
 });

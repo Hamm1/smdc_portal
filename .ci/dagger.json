@@ -1,6 +1,6 @@
 {
   "name": "Ci",
-  "engineVersion": "v0.15.0",
+  "engineVersion": "v0.15.2",
   "sdk": "typescript",
   "source": "dagger"
 }

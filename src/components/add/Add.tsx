@@ -1,99 +1,106 @@
-
-import { $, component$, useSignal} from '@builder.io/qwik';
+import { $, component$, useSignal } from '@builder.io/qwik';
 import { invoke } from '@tauri-apps/api/core';
 import { v4 as uuidv4 } from 'uuid';
 import Swal from 'sweetalert2';
 
 interface Location {
-    id: string,
-    title: string;
-    url: string;
-    removable: boolean
+  id: string;
+  title: string;
+  url: string;
+  removable: boolean;
 }
 
 export default component$(() => {
-    const title = useSignal('');
-    const url = useSignal('');
+  const title = useSignal('');
+  const url = useSignal('');
 
-    const sweet_alert = $(async (title: string) => {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.onmouseenter = Swal.stopTimer;
-              toast.onmouseleave = Swal.resumeTimer;
-            }
-          });
-          Toast.fire({
-            icon: "error",
-            title: title,
-            background: "#2f2f2f",
-            color: "#ffffff"
-          });
-    })
+  const sweet_alert = $(async (title: string) => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    });
+    Toast.fire({
+      icon: 'error',
+      title: title,
+      background: '#2f2f2f',
+      color: '#ffffff',
+    });
+  });
 
-    const submit_button = $(async () => {
-        if (title.value !== '' && url.value !== '' && url.value.toLowerCase().includes("https://") && url.value.toLowerCase().includes(".smdc.army.mil")){
-            const json_from_submit: Location = {
-                id:uuidv4(),
-                title:title?.value,
-                url:url?.value.toLowerCase(),
-                removable:true
-            }
-            const new_json: string = JSON.stringify(json_from_submit)
-            const v = await invoke('get_additional_variables', {qwik: new_json})
-            console.log(v);
-            (document.getElementById("dialog") as HTMLDialogElement).close()
-            window.location.reload()
-        } else if(title.value === '') {
-            sweet_alert("Title can not be blank")
-        } else if(url.value === '') {
-            sweet_alert("URL can not be blank")
-        } else if(!url.value.includes("https://")){
-            sweet_alert("URL Must contain https://")
-        } else if(!url.value.includes(".smdc.army.mil")){
-            sweet_alert("URL Must contain .smdc.army.mil")
-        }
-      })
+  const submit_button = $(async () => {
+    if (title.value !== '' && url.value !== '' && url.value.toLowerCase().includes('https://') && url.value.toLowerCase().includes('.smdc.army.mil')) {
+      const json_from_submit: Location = {
+        id: uuidv4(),
+        title: title?.value,
+        url: url?.value.toLowerCase(),
+        removable: true,
+      };
+      const new_json: string = JSON.stringify(json_from_submit);
+      const v = await invoke('get_additional_variables', { qwik: new_json });
+      console.log(v);
+      (document.getElementById('dialog') as HTMLDialogElement).close();
+      window.location.reload();
+    } else if (title.value === '') {
+      sweet_alert('Title can not be blank');
+    } else if (url.value === '') {
+      sweet_alert('URL can not be blank');
+    } else if (!url.value.includes('https://')) {
+      sweet_alert('URL Must contain https://');
+    } else if (!url.value.includes('.smdc.army.mil')) {
+      sweet_alert('URL Must contain .smdc.army.mil');
+    }
+  });
 
-      const reset_input = $(async () => {
-        title.value = '';
-        url.value = '';
-        (document.getElementById('input_title') as HTMLInputElement).value = '';
-        (document.getElementById('input_url') as HTMLInputElement).value = ''
-      })
+  const reset_input = $(async () => {
+    title.value = '';
+    url.value = '';
+    (document.getElementById('input_title') as HTMLInputElement).value = '';
+    (document.getElementById('input_url') as HTMLInputElement).value = '';
+  });
 
-      return (
-        <>
-            <div>
-                <div>
-                    <button class="btn m-5 float-right mt-5 ml-auto" onClick$={() => (document.getElementById("dialog") as HTMLDialogElement).showModal()}>
-                        ADD
-                    </button>
-                </div>
-                <dialog id="dialog" class="modal">
-                    <div class="modal-box">
-                        <h3 class="font-bold text-lg">Links</h3>
-                        <p class="py-4">Add a Title and URL, the URL must contain https:// and be a smdc domain.</p>
-                        <input id="input_title" type="text" placeholder="Title..." class="input input-bordered w-full max-w-xs m-3" onInput$={(e) => title.value = (e.target as HTMLInputElement).value} />
-                        <input id="input_url" type="text" placeholder="URL..." class="input input-bordered w-full max-w-xs m-3" onInput$={(e) => url.value = (e.target as HTMLInputElement).value} />
-                        <button class="btn btn-info btn-outline m-3" onClick$={() => submit_button()}>
-                            Submit
-                        </button>
-                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick$={() => {
-                            (document.getElementById("dialog") as HTMLDialogElement).close();
-                            reset_input()
-                            }}>✕
-                        </button>
-                    </div>
-                    <form method="dialog" class="modal-backdrop">
-                        <button onClick$={() =>{reset_input()}}>close</button>
-                    </form>
-                </dialog>
-            </div>
-        </>
-      )
-})
+  return (
+    <>
+      <div>
+        <div>
+          <button class="btn m-5 float-right mt-5 ml-auto" onClick$={() => (document.getElementById('dialog') as HTMLDialogElement).showModal()}>
+            ADD
+          </button>
+        </div>
+        <dialog id="dialog" class="modal">
+          <div class="modal-box">
+            <h3 class="font-bold text-lg">Links</h3>
+            <p class="py-4">Add a Title and URL, the URL must contain https:// and be a smdc domain.</p>
+            <input id="input_title" type="text" placeholder="Title..." class="input input-bordered w-full max-w-xs m-3" onInput$={(e) => (title.value = (e.target as HTMLInputElement).value)} />
+            <input id="input_url" type="text" placeholder="URL..." class="input input-bordered w-full max-w-xs m-3" onInput$={(e) => (url.value = (e.target as HTMLInputElement).value)} />
+            <button class="btn btn-info btn-outline m-3" onClick$={() => submit_button()}>
+              Submit
+            </button>
+            <button
+              class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+              onClick$={() => {
+                (document.getElementById('dialog') as HTMLDialogElement).close();
+                reset_input();
+              }}>
+              ✕
+            </button>
+          </div>
+          <form method="dialog" class="modal-backdrop">
+            <button
+              onClick$={() => {
+                reset_input();
+              }}>
+              close
+            </button>
+          </form>
+        </dialog>
+      </div>
+    </>
+  );
+});

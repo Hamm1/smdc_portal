@@ -16,6 +16,8 @@ bun run build:bun:debug
 - Release
   - Will Build without any dependancies. However it will install Docker and Dagger
 ```sh
+bun dagger
+<!-- or -->
 make dagger
 <!-- or -->
 pwsh .ci/dagger.ps1

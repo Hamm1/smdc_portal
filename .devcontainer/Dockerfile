@@ -9,7 +9,7 @@ RUN apt install curl unzip zsh git libdbus-1-dev pkg-config \
                 libnss3-dev libgdk-pixbuf2.0-dev libxss-dev\
                 libgtk-3-dev libsoup-3.0-dev libjavascriptcoregtk-4.1-dev \
                 librsvg2-dev libfuse2 libappindicator3-dev libwebkit2gtk-4.1-dev \
-                patchelf python3-requests python3-apt python3.12-venv python3-pip \
+                patchelf \
                 apt-transport-https ca-certificates gnupg lsb-release -y
 RUN curl -fsSL https://bun.sh/install | bash
 RUN curl -fsSL https://deno.land/x/install/install.sh | sh

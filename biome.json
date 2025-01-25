@@ -1,0 +1,95 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
+	"files": { "ignoreUnknown": false, "ignore": [] },
+	"formatter": {
+		"enabled": true,
+		"useEditorconfig": true,
+		"formatWithErrors": false,
+		"indentStyle": "space",
+		"indentWidth": 2,
+		"lineEnding": "lf",
+		"lineWidth": 200,
+		"attributePosition": "auto",
+		"bracketSpacing": true,
+		"ignore": [
+			"**/*.log",
+			"**/.DS_Store",
+			"**/*.",
+			".vscode/settings.json",
+			"**/.history",
+			"**/.yarn",
+			"**/bazel-*",
+			"**/bazel-bin",
+			"**/bazel-out",
+			"**/bazel-qwik",
+			"**/bazel-testlogs",
+			"**/dist",
+			"**/dist-dev",
+			"**/lib",
+			"**/lib-types",
+			"**/etc",
+			"**/external",
+			"**/node_modules",
+			"**/temp",
+			"**/tsc-out",
+			"**/tsdoc-metadata.json",
+			"**/target",
+			"**/output",
+			"**/rollup.config.js",
+			"**/build",
+			"**/.cache",
+			"**/.vscode",
+			"**/.rollup.cache",
+			"**/tsconfig.tsbuildinfo",
+			"**/vite.config.ts",
+			"**/*.spec.tsx",
+			"**/*.spec.ts",
+			"**/.netlify",
+			"**/pnpm-lock.yaml",
+			"**/package-lock.json",
+			"**/yarn.lock",
+			"**/server"
+		]
+	},
+	"organizeImports": { "enabled": true },
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": false,
+			"complexity": { "noBannedTypes": "off", "noUselessThisAlias": "off" },
+			"correctness": {
+				"noSwitchDeclarations": "off",
+				"noUnusedVariables": "error"
+			},
+			"style": {
+				"noInferrableTypes": "off",
+				"noNamespace": "off",
+				"noNonNullAssertion": "off",
+				"useImportType": "warn"
+			},
+			"suspicious": {
+				"noConsole": "off",
+				"noEmptyBlockStatements": "off",
+				"noEmptyInterface": "off",
+				"noExplicitAny": "off"
+			}
+		},
+		"ignore": ["dist", "nodes_modules", "server", "tmp", "*.config*"],
+		"include": ["src/**/*.ts*"]
+	},
+	"javascript": {
+		"formatter": {
+			"jsxQuoteStyle": "double",
+			"quoteProperties": "asNeeded",
+			"trailingCommas": "all",
+			"semicolons": "always",
+			"arrowParentheses": "always",
+			"bracketSameLine": true,
+			"quoteStyle": "single",
+			"attributePosition": "auto",
+			"bracketSpacing": true
+		},
+		"globals": ["exports"]
+	}
+}
