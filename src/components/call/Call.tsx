@@ -36,7 +36,7 @@ export default component$(() => {
 
   return (
     <>
-      <input id="search_field" type="text" placeholder="Search..." class="input input-bordered w-full max-w-xs m-5" onInput$={(e) => (search.value = (e.target as HTMLInputElement).value)} />
+      <input id="search_field" type="text" placeholder="Search..." class="input 2xl:input-lg input-bordered w-full max-w-xs m-5" onInput$={(e) => (search.value = (e.target as HTMLInputElement).value)} />
       {search.value != '' ? (
         <button
           class="btn btn-square btn-outline btn-error"
@@ -50,7 +50,7 @@ export default component$(() => {
       ) : (
         <></>
       )}
-      <ul role="list" class="grid grid-cols-2 2xl:grid-cols-4 3xl:grid-cols-6 gap-3">
+      <ul role="list" class="grid grid-cols-2 2xl:grid-cols-4 three-xl-grid-cols-6 gap-3">
         {state.locations
           .filter((record) => record.title.toLowerCase().includes(search.value.toLowerCase()))
           .map((record) => {
@@ -58,7 +58,7 @@ export default component$(() => {
               <div class="card w-96 bg-primary text-primary-content" key={record.title}>
                 <div class="card-body">
                   <h2 class="card-title">{record.title}</h2>
-                  <p class="break-words text-wrap">{record.url}</p>
+                  <p class="break-words text-wrap text-slate-300">{record.url}</p>
                   <div class="card-actions justify-end">
                     <button
                       class="btn"

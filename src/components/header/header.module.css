@@ -42,3 +42,15 @@
     display: inline-block;
   }
 }
+
+.responsive_image {
+  width: 200px;
+  height: 200px;
+}
+
+@media (min-width: 1536px) {
+  .responsive_image {
+    width: 400px;
+    height: 400px;
+  }
+}

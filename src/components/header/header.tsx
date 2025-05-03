@@ -6,20 +6,21 @@ import styles from './header.module.css';
 import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 
 export default component$(() => {
+  
   return (
     <header class={styles.header}>
       <div class={['container', styles.wrapper]}>
         <div class={styles.logo}>
           <a href="/" title="SMDC">
             {/* <SMDCLogo height={206} width={271} /> */}
-            <img src="../../../smdc_squared.png" width={200} height={200} />
+            <img class={styles.responsive_image} src="../../../smdc_squared.png" />
           </a>
         </div>
         <ul>
           <li>
             <a
               href="#"
-              class=" text-slate-900 hover:text-slate-400 dark:text-white"
+              class=" text-slate-900 2xl:text-lg hover:text-slate-400 dark:text-white"
               onClick$={() => {
                 new WebviewWindow('Documentation', {
                   incognito: true,
@@ -35,7 +36,7 @@ export default component$(() => {
           <li>
             <a
               href="#"
-              class=" text-slate-900 hover:text-slate-400 dark:text-white"
+              class=" text-slate-900 2xl:text-lg hover:text-slate-400 dark:text-white"
               onClick$={() => {
                 new WebviewWindow('KMST', {
                   incognito: true,
@@ -51,7 +52,7 @@ export default component$(() => {
           <li>
             <a
               href="#"
-              class=" text-slate-900 hover:text-slate-400 dark:text-white"
+              class=" text-slate-900 2xl:text-lg hover:text-slate-400 dark:text-white"
               onClick$={() => {
                 new WebviewWindow('Sharepoint', {
                   incognito: true,

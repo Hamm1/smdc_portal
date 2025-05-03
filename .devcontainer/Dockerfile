@@ -18,7 +18,7 @@ RUN curl -L https://dl.dagger.io/dagger/install.sh | BIN_DIR=$HOME/.local/bin sh
 RUN curl https://sh.rustup.rs --output ./rust.sh;chmod +x ./rust.sh;./rust.sh -y;rm ./rust.sh
 
 
-ARG POWERSHELL_VERSION=7.5.0
+ARG POWERSHELL_VERSION=7.5.1
 ARG POWERSHELL_DEP=libicu74_74.2-1ubuntu4_amd64.deb
 RUN wget https://mirror.it.ubc.ca/ubuntu/pool/main/i/icu/$POWERSHELL_DEP
 RUN dpkg -i $POWERSHELL_DEP

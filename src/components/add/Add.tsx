@@ -69,7 +69,7 @@ export default component$(() => {
     <>
       <div>
         <div>
-          <button class="btn m-5 float-right mt-5 ml-auto" onClick$={() => (document.getElementById('dialog') as HTMLDialogElement).showModal()}>
+          <button class="btn 2xl:btn-lg m-5 float-right mt-5 ml-auto" onClick$={() => (document.getElementById('dialog') as HTMLDialogElement).showModal()}>
             ADD
           </button>
         </div>

@@ -32,13 +32,13 @@ debug:
 	bun run build:bun:debug || npm run build:npm:debug
 
 format:
-	bun run format
+	bun run fmt
 
 clean:
 	bun run clean || npm run clean
 
 upgrade:
-	bun x npm-check-updates -u || npx npm-check-updates -u
+	bun update || npx npm-check-updates -u
 
 docker:
 	docker build -t tauri --output type=local,dest=./out/ . || sudo docker build -t tauri --output type=local,dest=./out/ .
@@ -65,15 +65,15 @@ flox_delete:
 
 code_server:
 ifeq ($(detected_OS),Linux)
-	(sudo docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(cwd):$(cwd) --name=code_server -p 8080:8080 -d matthewhambright/code_server:latest || \
-	 docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(cwd):$(cwd) --name=code_server -p 8080:8080 -d matthewhambright/code_server:latest) || (echo "Container Exists")
+	(sudo docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(cwd):$(cwd) --name=code_server -p 443:443 -d matthewhambright/code_server:latest || \
+	 docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(cwd):$(cwd) --name=code_server -p 443:443 -d matthewhambright/code_server:latest) || (echo "Container Exists")
 endif
 ifeq ($(detected_OS),Darwin)
-	(sudo docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(cwd):$(cwd) --name=code_server -p 8080:8080 -d matthewhambright/code_server:latest || \
-	 docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(cwd):$(cwd) --name=code_server -p 8080:8080 -d matthewhambright/code_server:latest) || (echo "Container Exists")
+	(sudo docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(cwd):$(cwd) --name=code_server -p 443:443 -d matthewhambright/code_server:latest || \
+	 docker run -v /var/run/docker.sock:/var/run/docker.sock -v $(cwd):$(cwd) --name=code_server -p 443:443 -d matthewhambright/code_server:latest) || (echo "Container Exists")
 endif
 ifeq ($(detected_OS),Windows)
-	(docker run -v //var/run/docker.sock:/var/run/docker.sock -v $(cwd):/workspace/smdc_portal --name=code_server -p 8080:8080 -d matthewhambright/code_server:latest) || (echo "Container Exists")
+	(docker run -v //var/run/docker.sock:/var/run/docker.sock -v $(cwd):/workspace/smdc_portal --name=code_server -p 443:443 -d matthewhambright/code_server:latest) || (echo "Container Exists")
 endif
 
 code_server_use:
