@@ -25,7 +25,7 @@
 				"denoland.vscode-deno",
 				"docker.docker",
 				"ms-azuretools.vscode-containers",
-				"eamodio.gitlens",
+				"waderyan.gitblame",
 				"ms-vscode.vscode-typescript-next",
 				"ms-vscode.makefile-tools",
 				"PKief.material-icon-theme",

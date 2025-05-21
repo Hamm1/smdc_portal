@@ -3,7 +3,7 @@
 FROM ubuntu:24.04
 RUN apt update
 RUN apt install curl unzip zsh git libdbus-1-dev pkg-config \
-                libwebkit2gtk-4.1-dev \
+                libwebkit2gtk-4.1-dev libicu74=74.2-1ubuntu3.1 \
                 zlib1g libevent-dev libicu-dev \
                 build-essential wget libssl-dev software-properties-common \
                 libnss3-dev libgdk-pixbuf2.0-dev libxss-dev\
@@ -13,7 +13,7 @@ RUN apt install curl unzip zsh git libdbus-1-dev pkg-config \
                 apt-transport-https ca-certificates gnupg lsb-release -y
 RUN curl -fsSL https://bun.sh/install | bash
 RUN curl -fsSL https://deno.land/x/install/install.sh | sh
-RUN curl -SLO https://deb.nodesource.com/nsolid_setup_deb.sh; rm -f /usr/share/keyrings/nodesource.gpg; chmod 500 nsolid_setup_deb.sh; ./nsolid_setup_deb.sh 23; apt-get install nodejs -y; rm -f ./nsolid_setup_deb.sh
+RUN curl -SLO https://deb.nodesource.com/nsolid_setup_deb.sh; rm -f /usr/share/keyrings/nodesource.gpg; chmod 500 nsolid_setup_deb.sh; ./nsolid_setup_deb.sh 24; apt-get install nodejs -y; rm -f ./nsolid_setup_deb.sh
 RUN curl -L https://dl.dagger.io/dagger/install.sh | BIN_DIR=$HOME/.local/bin sh
 RUN curl https://sh.rustup.rs --output ./rust.sh;chmod +x ./rust.sh;./rust.sh -y;rm ./rust.sh
 

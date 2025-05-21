@@ -13,6 +13,9 @@ else
 cwd := $(shell sh -c '${PWD} || pwd || echo Unknown')
 endif
 
+test:
+	cargo test --manifest-path src-tauri/Cargo.toml
+
 run:
 	bun run dev
 

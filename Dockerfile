@@ -10,7 +10,7 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 RUN rustup target add x86_64-pc-windows-msvc
 RUN cargo install --locked cargo-xwin
 RUN printf '[target.x86_64-pc-windows-gnu]\nlinker = "x86_64-w64-mingw32-gcc"\nar = "x86_64-w64-mingw32-gcc-ar"\n' > /root/.cargo/config
-RUN curl -SLO https://deb.nodesource.com/nsolid_setup_deb.sh; rm -f /usr/share/keyrings/nodesource.gpg; chmod 500 nsolid_setup_deb.sh; ./nsolid_setup_deb.sh 23; apt-get install nodejs -y; rm -f ./nsolid_setup_deb.sh
+RUN curl -SLO https://deb.nodesource.com/nsolid_setup_deb.sh; rm -f /usr/share/keyrings/nodesource.gpg; chmod 500 nsolid_setup_deb.sh; ./nsolid_setup_deb.sh 24; apt-get install nodejs -y; rm -f ./nsolid_setup_deb.sh
 RUN curl -fsSL https://bun.sh/install | bash
 ENV PATH="/root/.bun/bin:${PATH}"
 WORKDIR /app

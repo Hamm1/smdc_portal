@@ -16,12 +16,12 @@
     "isolatedModules": true,
     "outDir": "tmp",
     "noEmit": true,
-    "types": ["node", "vite/client"],
+    "types": ["node", "vite/client", "playwright/test"],
     "paths": {
       "~/*": ["./src/*"]
     }
   },
   "files": ["./biome.json"],
-  "include": ["src", "./*.d.ts", "./*.config.ts"],
+  "include": ["src", "./*.d.ts", "./*.config.ts","tests/**/*.ts", "tests/**/*.tsx"],
 	"exclude": ["node_modules"]
 }
