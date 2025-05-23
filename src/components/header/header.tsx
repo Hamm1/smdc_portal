@@ -6,7 +6,6 @@ import styles from './header.module.css';
 import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 
 export default component$(() => {
-  
   return (
     <header class={styles.header}>
       <div class={['container', styles.wrapper]}>

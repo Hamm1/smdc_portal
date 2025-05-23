@@ -23,7 +23,7 @@ cargo.version = "1.86.0"
 bun.pkg-path = "bun"
 bun.version = "1.2.13"
 deno.pkg-path = "deno"
-deno.version = "2.2.10"
+deno.version = "2.2.12"
 powershell.pkg-path = "powershell"
 # hello.pkg-path = "hello"
 # nodejs = { version = "^20.15.1", pkg-path = "nodejs" }

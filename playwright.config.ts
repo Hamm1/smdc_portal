@@ -32,7 +32,7 @@ const config: PlaywrightTestConfig = {
   ],
 
   webServer: {
-    command: "npm run preview",
+    command: "bun run preview",
     port: 5173,
   },
 };

@@ -36,7 +36,13 @@ export default component$(() => {
 
   return (
     <>
-      <input id="search_field" type="text" placeholder="Search..." class="input 2xl:input-lg input-bordered w-full max-w-xs m-5" onInput$={(e) => (search.value = (e.target as HTMLInputElement).value)} />
+      <input
+        id="search_field"
+        type="text"
+        placeholder="Search..."
+        class="input 2xl:input-lg input-bordered w-full max-w-xs m-5"
+        onInput$={(e) => (search.value = (e.target as HTMLInputElement).value)}
+      />
       {search.value != '' ? (
         <button
           class="btn btn-square btn-outline btn-error"

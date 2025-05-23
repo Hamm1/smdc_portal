@@ -2,6 +2,45 @@ stages:
   - build
   - release
 
+smdc_portal_rust_testing:
+  stage: build
+  image: ubuntu:24.04
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+  script:
+    - echo "Testing the project..."
+    - apt update
+    - apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget unzip
+    - apt-get install -y file libssl-dev libgtk-3-dev libayatana-appindicator3-dev librsvg2-dev
+    - apt-get install -y libsoup-3.0-dev libjavascriptcoregtk-4.1-dev
+    - curl --proto =https --tlsv1.2 -sSf https://sh.rustup.rs -o rustup-init.sh
+    - chmod +x rustup-init.sh
+    - ./rustup-init.sh -y --no-modify-path
+    - export PATH="$HOME/.cargo/bin:$PATH"
+    - cargo test --manifest-path src-tauri/Cargo.toml
+
+smdc_portal_javascript_testing:
+  stage: build
+  image: ubuntu:24.04
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+  script:
+    - echo "Testing the project..."
+    - apt update
+    - apt-get install -y build-essential curl wget unzip libssl-dev
+    - curl -SLO https://deb.nodesource.com/nsolid_setup_deb.sh
+    - rm -f /usr/share/keyrings/nodesource.gpg
+    - chmod 500 nsolid_setup_deb.sh
+    - ./nsolid_setup_deb.sh 23
+    - apt-get install nodejs -y
+    - curl -fsSL https://bun.sh/install -o bun-installer.sh
+    - chmod +x bun-installer.sh
+    - ./bun-installer.sh
+    - export PATH="$HOME/.bun/bin:$PATH"
+    - bun install
+    - bun x playwright install --with-deps
+    - bun run test.e2e
+
 smdc_portal_build_linux:
   stage: build
   image: ubuntu:22.04

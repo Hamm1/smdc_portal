@@ -1,13 +1,13 @@
 [package]
 name = "smdc_portal"
-version = "0.1.0"
+version = "0.10.0"
 description = "SMDC app to connect services"
 authors = ["matthew Hambright"]
 license = ""
 repository = ""
 default-run = "smdc_portal"
 edition = "2021"
-rust-version = "1.75"
+rust-version = "1.86"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
