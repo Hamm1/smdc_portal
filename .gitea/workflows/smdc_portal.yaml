@@ -18,7 +18,7 @@ on:
 
 jobs:
   once:
-    name: Create GitHub release
+    name: Create Gitea release
     runs-on: 'ubuntu-latest'
     outputs:
       upload_url: ${{ steps.create_release.outputs.upload_url }}
@@ -51,7 +51,8 @@ jobs:
       - name: Dagger Linux
         if: matrix.os == 'linux'
         run: |
-          sudo apt update && sudo apt install curl unzip wget;
+          apk update;
+          apk add unzip curl wget;
           curl -L https://dl.dagger.io/dagger/install.sh | BIN_DIR=$HOME/.local/bin sh;
           export PATH="$HOME/.local/bin:$PATH";
           cd .ci
@@ -60,7 +61,8 @@ jobs:
       - name: Dagger Windows
         if: matrix.os == 'windows'
         run: |
-          sudo apt update && sudo apt install curl unzip wget;
+          apk update;
+          apk add unzip curl wget;
           curl -L https://dl.dagger.io/dagger/install.sh | BIN_DIR=$HOME/.local/bin sh;
           export PATH="$HOME/.local/bin:$PATH";
           cd .ci

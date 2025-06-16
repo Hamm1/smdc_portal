@@ -7,6 +7,7 @@ smdc_portal_rust_testing:
   image: ubuntu:24.04
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   script:
     - echo "Testing the project..."
     - apt update
@@ -24,6 +25,7 @@ smdc_portal_javascript_testing:
   image: ubuntu:24.04
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   script:
     - echo "Testing the project..."
     - apt update
@@ -38,7 +40,7 @@ smdc_portal_javascript_testing:
     - ./bun-installer.sh
     - export PATH="$HOME/.bun/bin:$PATH"
     - bun install
-    - bun x playwright install --with-deps
+    - bun x playwright install --with-deps chromium
     - bun run test.e2e
 
 smdc_portal_build_linux:
