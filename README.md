@@ -18,13 +18,13 @@ bun run build:bun:debug
 ```sh
 bun dagger
 <!-- or -->
-make dagger
+just dagger
 <!-- or -->
 pwsh .ci/dagger.ps1
 <!-- or -->
 docker build -t tauri --output type=local,dest=./out/ .
 <!-- or -->
-make docker
+just docker
 ``` 
   - If Rust and Bun are installed 
 ```sh
@@ -58,5 +58,6 @@ bun run build:bun
 - Nodejs (NPM)
 - Bun
 - Git
+- just
 
 

@@ -10,6 +10,7 @@
     "ms-vscode.makefile-tools",
     "ms-vscode.powershell",
     "ms-vscode.vscode-typescript-next",
+    "nefrob.vscode-just-syntax",
     "oven.bun-vscode",
     "pkief.material-icon-theme",
     "rust-lang.rust-analyzer",

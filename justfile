@@ -48,8 +48,9 @@ flox:
 flox_delete:
 	{{ sudo }} docker rm -f flox
 
+workspace := if os_family() == "windows" { "{{invocation_directory()}}" } else { "/workspace/smdc_portal" }
 code_server:
-	({{ sudo }} docker run -v /var/run/docker.sock:/var/run/docker.sock -v {{invocation_directory()}}:{{invocation_directory()}} --name=code_server -p 443:443 -d matthewhambright/code_server:latest) || (echo "Container Exists")
+	({{ sudo }} docker run -v /var/run/docker.sock:/var/run/docker.sock -v {{invocation_directory()}}:{{ workspace }} --name=code_server -p 443:443 -d matthewhambright/code_server:latest) || (echo "Container Exists")
 
 code_server_use:
 	{{ sudo }} docker exec -it code_server zsh
