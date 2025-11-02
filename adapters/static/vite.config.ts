@@ -10,6 +10,15 @@ export default extendConfig(baseConfig as any, () => {
         input: ['@qwik-city-plan'],
       },
     },
+    // Windows-specific optimizations
+    server: {
+      fs: {
+        strict: false,
+      },
+    },
+    optimizeDeps: {
+      force: true,
+    },
     plugins: [
       staticAdapter({
         origin: 'https://tauri.localhost/',

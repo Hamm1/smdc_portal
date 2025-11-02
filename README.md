@@ -60,4 +60,15 @@ bun run build:bun
 - Git
 - just
 
+### Current working Tauri dependencies
+```toml
+[build-dependencies]
+tauri-build = { version = "=2.1.0", features = [] }
+tauri-utils = "=2.3.0"
 
+[dependencies]
+tauri = { version = "=2.4.0", features = [] }
+tauri-plugin = "=2.1.0"
+tauri-plugin-shell = "=2.2.0"
+tauri-plugin-process = "=2.2.0"
+```

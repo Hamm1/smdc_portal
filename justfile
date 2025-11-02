@@ -15,6 +15,9 @@ start:
 install:
 	bun install || npm install
 
+qwik:
+	bun install && bun qwik:build
+
 build:
 	(bun install && bun run build:bun:debug) || (npm install -force && npm run build:npm:debug)
 
@@ -24,7 +27,7 @@ release:
 debug:
 	bun run build:bun:debug || npm run build:npm:debug
 
-format:
+fmt:
 	bun run fmt
 
 clean:
@@ -39,6 +42,22 @@ docker:
 dagger := if os_family() == "windows" { "pwsh dagger.ps1" } else { "dagger.sh" }
 dagger:
 	cd .ci && {{ dagger }}
+
+dagger_windows := if os_family() == "windows" { 
+		"Start-Process 'dagger' -ArgumentList 'call windows --src=../ export --path=" + invocation_directory() + "/out/smdc_portal.exe' -Wait -NoNewWindow"
+	} else { 
+		"dagger call windows --src=../ export --path=" + invocation_directory() + "/out/smdc_portal.exe"
+	}
+dagger_windows:
+	cd .ci && {{ dagger_windows }}
+
+dagger_linux := if os_family() == "windows" { 
+		"Start-Process 'dagger' -ArgumentList 'call linux --src=../ export --path=" + invocation_directory() + "/out/smdc_portal' -Wait -NoNewWindow"
+	} else { 
+		"dagger call linux --src=../ export --path=" + invocation_directory() + "/out/smdc_portal"
+	}
+dagger_linux:
+	cd .ci && {{ dagger_linux }}
 
 flox:
 	({{ sudo }} docker run --pull always -v {{invocation_directory()}}:/smdc_portal -v {{invocation_directory()}}/.flox/build/zshrc:/root/.zshrc -v /var/run/docker.sock:/var/run/docker.sock --name=flox -d -it ghcr.io/flox/flox) || (echo "Container Exists")

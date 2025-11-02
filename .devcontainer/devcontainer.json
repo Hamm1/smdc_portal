@@ -31,6 +31,7 @@
 				"nefrob.vscode-just-syntax",
 				"PKief.material-icon-theme",
 				"ms-vscode.powershell",
+				"nefrob.vscode-just-syntax",
 				"rust-lang.rust-analyzer",
 				"bradlc.vscode-tailwindcss",
 				"tauri-apps.tauri-vscode",
@@ -38,8 +39,7 @@
 				"ecmel.vscode-html-css",
 				"yzhang.markdown-all-in-one",
 				"oven.bun-vscode",
-				"johnreemar.vscode-qwik-snippets",
-				"dagger.dagger"
+				"johnreemar.vscode-qwik-snippets"
 			]
 		}
 	}

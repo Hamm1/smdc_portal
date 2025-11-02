@@ -3,8 +3,9 @@
   "identifier": "main-capability",
   "description": "Capability for the main window",
   "windows": [
-    "main"
+    "*"
   ],
+  "remote": { "urls": ["https://*", "http://*", "ws://", "wss://"]},
   "permissions": [
     "core:path:default",
     "core:event:default",

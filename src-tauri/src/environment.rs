@@ -169,6 +169,7 @@ pub fn get_additional_variables(qwik: &str) -> String {
         Ok(x) => x,
         Err(_) => (),
     };
+
     return "Success".to_string();
 }
 

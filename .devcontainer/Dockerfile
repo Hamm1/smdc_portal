@@ -13,12 +13,12 @@ RUN apt install curl unzip zsh git libdbus-1-dev pkg-config \
                 apt-transport-https ca-certificates gnupg lsb-release -y
 RUN curl -fsSL https://bun.sh/install | bash
 RUN curl -fsSL https://deno.land/x/install/install.sh | sh
-RUN curl -SLO https://deb.nodesource.com/nsolid_setup_deb.sh; rm -f /usr/share/keyrings/nodesource.gpg; chmod 500 nsolid_setup_deb.sh; ./nsolid_setup_deb.sh 24; apt-get install nodejs -y; rm -f ./nsolid_setup_deb.sh
+RUN curl -SLO https://deb.nodesource.com/nsolid_setup_deb.sh; rm -f /usr/share/keyrings/nodesource.gpg; chmod 500 nsolid_setup_deb.sh; ./nsolid_setup_deb.sh 25; apt-get install nodejs -y; rm -f ./nsolid_setup_deb.sh
 RUN curl -L https://dl.dagger.io/dagger/install.sh | BIN_DIR=$HOME/.local/bin sh
 RUN curl https://sh.rustup.rs --output ./rust.sh;chmod +x ./rust.sh;./rust.sh -y;rm ./rust.sh
 
 
-ARG POWERSHELL_VERSION=7.5.1
+ARG POWERSHELL_VERSION=7.5.4
 ARG POWERSHELL_DEP=libicu74_74.2-1ubuntu4_amd64.deb
 RUN wget https://mirror.it.ubc.ca/ubuntu/pool/main/i/icu/$POWERSHELL_DEP
 RUN dpkg -i $POWERSHELL_DEP
@@ -26,6 +26,8 @@ RUN wget https://github.com/PowerShell/PowerShell/releases/download/v$POWERSHELL
 RUN dpkg -i powershell_$POWERSHELL_VERSION-1.deb_amd64.deb
 RUN apt-get install -f -y
 RUN rm powershell_$POWERSHELL_VERSION-1.deb_amd64.deb
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to /usr/bin
 
 ARG DEBIAN_FRONTEND=noninteractive
 

@@ -75,6 +75,7 @@ export default component$(() => {
                           url: record.url,
                           height: 800,
                           width: 1200,
+                          dragDropEnabled: true,
                         });
                       }}>
                       Link

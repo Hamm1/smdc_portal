@@ -42,3 +42,6 @@ lerna-debug.log*
 #playwright
 playwright-report/
 test-results/
+
+#turbo
+.turbo

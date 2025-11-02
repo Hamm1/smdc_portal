@@ -1,5 +1,5 @@
 {
-  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "build": {
     "beforeBuildCommand": "bun run qwik:build",
     "beforeDevCommand": "bun run dev",
@@ -60,7 +60,8 @@
           "title": "SMDC Portal",
           "width": 850,
           "center": true,
-          "decorations": true
+          "decorations": true,
+          "create": true
         }
       ],
       "withGlobalTauri": true
