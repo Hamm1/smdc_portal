@@ -18,7 +18,7 @@
     "build:bun": "bun run tauri build",
     "build:bun:debug": "bun run tauri build --debug",
     "build:npm:debug": "npm run tauri build -- --debug",
-    "clean": "rm package-lock.json ./src-tauri/Cargo.lock || true && (rm -rf node_modules dist tmp server out .ci/out src-tauri/target .flox/run .flox/cache .flox/log .flox/env/manifest.lock test-results playwright-report || @powershell rm -recurse node_modules dist tmp server out .ci/out src-tauri/target .flox/run .flox/cache .flox/log .flox/env/manifest.lock test-results playwright-report)",
+    "clean": "rm package-lock.json ./src-tauri/Cargo.lock || true && (rm -rf node_modules dist tmp server out .ci/out src-tauri/target .flox/run .flox/cache .flox/log .flox/env/manifest.lock test-results playwright-report .husky/_ || @powershell rm -recurse node_modules dist tmp server out .ci/out src-tauri/target .flox/run .flox/cache .flox/log .flox/env/manifest.lock test-results playwright-report .husky/_)",
     "dagger": "bun run dagger:windows || bun run dagger:linux",
     "dagger:linux": "cd .ci && sh ./dagger.sh",
     "dagger:windows": "cd .ci && pwsh ./dagger.ps1",
