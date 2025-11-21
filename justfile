@@ -2,39 +2,50 @@
 set shell := ["bash", "-uc"]
 set windows-shell := ["pwsh.exe","-c"]
 sudo := if os_family() == "windows" { "" } else { "sudo" }
+bun := if os() == "windows" {
+    `pwsh -c 'where.exe bun || echo Unknown'`
+} else {
+    `sh -c 'which bun 2>/dev/null || echo Unknown'`
+}
+npm := if os() == "windows" {
+    `pwsh -c 'where.exe npm || echo Unknown'`
+} else {
+    `sh -c 'which npm 2>/dev/null || echo Unknown'`
+}
+pkg_manager := if bun != "Unknown" { bun } else { npm }
 
 test:
 	cargo test --manifest-path src-tauri/Cargo.toml
 
 run:
-	bun run dev
+	{{ pkg_manager }} run dev
 
 start:
-	bun run start
+	{{ pkg_manager }} run start
 
 install:
-	bun install || npm install
+	{{ pkg_manager }} install
 
 qwik:
-	bun install && bun qwik:build
+	{{ pkg_manager }} install && {{ pkg_manager }} qwik:build
 
 build:
-	(bun install && bun run build:bun:debug) || (npm install -force && npm run build:npm:debug)
+	({{ pkg_manager }} install && {{ pkg_manager }} run build:{{ pkg_manager }}:debug)
 
 release:
-	bun run build:bun || npm run build
+	{{ pkg_manager }} run build:bun
 
 debug:
-	bun run build:bun:debug || npm run build:npm:debug
+	{{ pkg_manager }} run build:bun:debug
 
 fmt:
-	bun run fmt
+	{{ pkg_manager }} run fmt
 
 clean:
-	bun run clean || npm run clean
+	{{ pkg_manager }} run clean
 
 upgrade:
-	bun update || npx npm-check-updates -u
+	{{ pkg_manager }} update || npx npm-check-updates -u
 
 docker:
 	{{ sudo }} docker build -t tauri --output type=local,dest=./out/ .
