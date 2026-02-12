@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - 'main'
-    tags:
-      - "release-v[0-9]+.[0-9]+.[0-9]+"
-      - "release-v[0-9]+.[0-9]+.[0-9]+-rc[0-9]+"
 
 jobs:
   rust:
@@ -149,18 +146,18 @@ jobs:
                   "assets": [
                     {
                       "path": "artifacts/smdc_portal",
-                      "name": "SMDC-Portal",
-                      "label": "SMDC-Portal (Linux)"
+                      "name": "smdc_portal",
+                      "label": "smdc_portal"
                     },
                     {
                       "path": "artifacts/smdc_portal.exe",
-                      "name": "SMDC-Portal.exe",
-                      "label": "SMDC-Portal (Windows)"
+                      "name": "smdc_portal.exe",
+                      "label": "smdc_portal.exe"
                     },
                     {
                       "path": "artifacts/smdc_portal_0.1.0_x64_en-US.msi",
-                      "name": "SMDC-Portal.msi",
-                      "label": "SMDC-Portal (Windows MSI)"
+                      "name": "smdc_portal.msi",
+                      "label": "smdc_portal.msi"
                     }
                   ]
                 }
@@ -171,31 +168,7 @@ jobs:
           echo '{"name": "smdc_portal", "version": "0.0.0-development", "private": true}' > package.json
 
       - name: Release on GitHub with assets
-        id: semantic_release
-        run: |
-          sudo apt-get update && sudo apt-get install -y jq
-          npx semantic-release 2>&1 | tee semantic-release.log
-          if grep -q "There are no relevant changes, so no new version is released" semantic-release.log; then
-            echo "No release created by semantic-release - exiting workflow"
-            echo "release_created=false" >> $GITHUB_OUTPUT
-            exit 0
-          fi
-          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
-          if [ -z "$LATEST_TAG" ]; then
-            echo "No release tag found - exiting workflow"
-            echo "release_created=false" >> $GITHUB_OUTPUT
-            exit 0
-          fi
-          if [ -f package.json ]; then
-            VERSION=$(jq -r '.version' package.json)
-            echo "Found version in package.json: $VERSION"
-          else
-            VERSION=$(echo "$LATEST_TAG" | sed 's/^v//')
-            echo "Using git tag version: $VERSION"
-          fi
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "release_created=true" >> $GITHUB_OUTPUT
-          echo "Release created successfully with version: $VERSION"
+        run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: "dummy-token"
